@@ -3,6 +3,7 @@ object Compose {
     const val activityCompose = "androidx.activity:activity-compose:$activityComposeVersion"
 
     const val composeVersion = "1.0.5"
+    const val iconsExtended = "androidx.compose.material:material-icons-extended:$composeVersion"
     const val material = "androidx.compose.material:material:$composeVersion"
     const val tooling = "androidx.compose.ui:ui-tooling:$composeVersion"
     const val ui = "androidx.compose.ui:ui:$composeVersion"

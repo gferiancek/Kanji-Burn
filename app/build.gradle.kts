@@ -41,6 +41,9 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.components))
+    implementation(project(Modules.core))
+
     implementation(Accompianist.navigationAnimation)
 
     implementation(AndroidX.appCompat)
@@ -51,6 +54,7 @@ dependencies {
 
     implementation(Compose.activityCompose)
     implementation(Compose.hiltNavigation)
+    implementation(Compose.iconsExtended)
     implementation(Compose.material)
     implementation(Compose.navigation)
     implementation(Compose.tooling)

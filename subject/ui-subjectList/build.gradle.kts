@@ -4,5 +4,6 @@ apply {
 
 
 dependencies {
+    "implementation"(project(Modules.components))
     "implementation"(project(Modules.core))
 }

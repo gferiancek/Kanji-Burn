@@ -5,4 +5,5 @@ apply {
 
 dependencies {
     "implementation"(project(Modules.core))
+    "implementation"(Compose.iconsExtended)
 }
