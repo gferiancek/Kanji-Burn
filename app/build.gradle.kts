@@ -43,6 +43,8 @@ android {
 dependencies {
     implementation(project(Modules.components))
     implementation(project(Modules.core))
+    implementation(project(Modules.subjectInteractors))
+    implementation(project(Modules.ui_subjectList))
 
     implementation(Accompianist.navigationAnimation)
 

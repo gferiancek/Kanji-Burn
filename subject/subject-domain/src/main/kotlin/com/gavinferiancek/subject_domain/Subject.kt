@@ -2,7 +2,6 @@ package com.gavinferiancek.subject_domain
 
 abstract class Subject(
     open val id: Int,
-    open val type: Int,
     open val level: Int,
     open val characters: String?,
     open val meanings: List<Meaning>,
@@ -22,7 +21,6 @@ abstract class Subject(
 }
 data class Radical(
     override val id: Int,
-    override val type: Int,
     override val level: Int,
     override val characters: String?,
     override val meanings: List<Meaning>,
@@ -33,7 +31,7 @@ data class Radical(
     override val readings: List<Reading> = listOf(),
     val amalgamationSubjectIds: List<Int>,
     val characterImage: String
-) : Subject(id, type, level, characters, meanings, auxiliaryMeanings, meaningMnemonic, lessonPosition, srsSystem, readings) {
+) : Subject(id, level, characters, meanings, auxiliaryMeanings, meaningMnemonic, lessonPosition, srsSystem, readings) {
 
     /**
      * Radicals do not have have a reading, so we return an empty string.  This function is included in the Base Subject class
@@ -47,7 +45,6 @@ data class Radical(
 
 data class Kanji(
     override val id: Int,
-    override val type: Int,
     override val level: Int,
     override val characters: String,
     override val meanings: List<Meaning>,
@@ -62,14 +59,13 @@ data class Kanji(
     val meaningHint: String?,
     val readingMnemonic: String,
     val readingHint: String
-) : Subject(id, type, level, characters, meanings, auxiliaryMeanings, meaningMnemonic, lessonPosition, srsSystem, readings) {
+) : Subject(id, level, characters, meanings, auxiliaryMeanings, meaningMnemonic, lessonPosition, srsSystem, readings) {
 
     override fun getPrimaryReading() = readings.first() { it.primary }.reading
 }
 
 data class Vocab(
     override val id: Int,
-    override val type: Int,
     override val level: Int,
     override val characters: String,
     override val meanings: List<Meaning>,
@@ -83,7 +79,7 @@ data class Vocab(
     val componentSubjectIds: List<Int>,
     val contextSentences: List<ContextSentence>,
     val pronunciationAudios: List<PronunciationAudio>
-) : Subject(id, type, level, characters, meanings, auxiliaryMeanings, meaningMnemonic, lessonPosition, srsSystem, readings) {
+) : Subject(id, level, characters, meanings, auxiliaryMeanings, meaningMnemonic, lessonPosition, srsSystem, readings) {
 
     override fun getPrimaryReading() = readings.first() { it.primary }.reading
 }
