@@ -4,16 +4,21 @@ import com.gavinferiancek.core.domain.DataState
 import com.gavinferiancek.core.domain.ProgressBarState
 import com.gavinferiancek.core.domain.UIComponent
 import com.gavinferiancek.subject_datasource.network.SubjectService
-import com.gavinferiancek.subject_datasource.network.model.toSubject
 import com.gavinferiancek.subject_datasource.network.model.toSubjectList
+import com.gavinferiancek.subject_domain.Kanji
+import com.gavinferiancek.subject_domain.Radical
 import com.gavinferiancek.subject_domain.Subject
+import com.gavinferiancek.subject_domain.Vocab
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
 
 class GetSubjects(
     val service: SubjectService,
 ) {
-    fun execute(): Flow<DataState<List<Subject>>> = flow {
+    fun execute(): Flow<DataState<List<List<Subject>>>> = flow {
         try {
             emit(DataState.Loading(progressBarState = ProgressBarState.Loading))
 
@@ -29,7 +34,14 @@ class GetSubjects(
                 page += 1
                 subjects.addAll(response.data.toSubjectList())
             }
-            emit(DataState.Data(data = subjects.toList()))
+            // SubjectListScreen uses a ViewPager to show separate list for each type of subject.
+            // We return a list of lists so that we can sync that to the TabRow. (1st tab = first list, etc)
+            val instancedSubjects = listOf(
+                subjects.filterIsInstance<Radical>(),
+                subjects.filterIsInstance<Kanji>(),
+                subjects.filterIsInstance<Vocab>(),
+            )
+            emit(DataState.Data(data = instancedSubjects))
         } catch(e: Exception) {
             emit(DataState.Response(
                 uiComponent = UIComponent.None(

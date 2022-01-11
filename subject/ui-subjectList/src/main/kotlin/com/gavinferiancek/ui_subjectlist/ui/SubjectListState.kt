@@ -5,5 +5,5 @@ import com.gavinferiancek.subject_domain.Subject
 
 data class SubjectListState(
     val progressBarState: ProgressBarState = ProgressBarState.Idle,
-    val subjects: List<Subject> = listOf(),
+    val subjects: List<List<Subject>> = listOf(),
 )

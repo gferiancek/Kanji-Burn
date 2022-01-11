@@ -46,7 +46,8 @@ dependencies {
     implementation(project(Modules.subjectInteractors))
     implementation(project(Modules.ui_subjectList))
 
-    implementation(Accompianist.navigationAnimation)
+    implementation(Accompanist.navigationAnimation)
+    implementation(Accompanist.pager)
 
     implementation(AndroidX.appCompat)
     implementation(AndroidX.coreKtx)

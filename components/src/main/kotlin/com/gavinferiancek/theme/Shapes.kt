@@ -1,4 +1,4 @@
-package com.gavinferiancek.kanjiburn.ui.theme
+package com.gavinferiancek.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

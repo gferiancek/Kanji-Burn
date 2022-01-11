@@ -1,5 +1,6 @@
 package com.gavinferiancek.subject_domain
 
+
 abstract class Subject(
     open val id: Int,
     open val level: Int,
@@ -18,6 +19,7 @@ abstract class Subject(
     fun getPrimaryMeaning() = meanings.first { it.primary }.meaning
 
     abstract fun getPrimaryReading(): String
+
 }
 data class Radical(
     override val id: Int,
