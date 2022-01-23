@@ -3,9 +3,10 @@ package com.gavinferiancek.kanjiburn.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -14,6 +15,8 @@ import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.kanjiburn.ui.navigation.Screens
 import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
+import com.gavinferiancek.ui_subjectdetail.ui.SubjectDetailScreen
+import com.gavinferiancek.ui_subjectdetail.ui.SubjectDetailViewModel
 import com.gavinferiancek.ui_subjectlist.ui.SubjectListScreen
 import com.gavinferiancek.ui_subjectlist.ui.SubjectListViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -39,18 +42,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             KanjiBurnTheme {
                 val navController = rememberAnimatedNavController()
-                BoxWithConstraints {
-                    AnimatedNavHost(
-                        navController = navController,
-                        startDestination = Screens.SubjectList.route,
-                        builder = {
-                            addSubjectList(
-                                navController = navController,
-                                imageLoader = imageLoader,
-                            )
-                        }
-                    )
-                }
+                AnimatedNavHost(
+                    navController = navController,
+                    startDestination = Screens.SubjectList.route,
+                    builder = {
+                        addSubjectList(
+                            navController = navController,
+                            imageLoader = imageLoader,
+                        )
+                        addSubjectDetail(
+                            navController = navController,
+                            imageLoader = imageLoader,
+                        )
+                    }
+                )
             }
         }
     }
@@ -67,12 +72,58 @@ fun NavGraphBuilder.addSubjectList(
 ) {
     composable(
         route = Screens.SubjectList.route,
+        exitTransition = {
+            slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(300)
+            )
+        },
+        popEnterTransition = {
+            slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(300)
+            )
+        }
     ) {
         val viewModel: SubjectListViewModel = hiltViewModel()
         SubjectListScreen(
             state = viewModel.state.value,
             events = viewModel::onTriggerEvent,
             imageLoader = imageLoader,
+            navigateToDetailScreen = { subjectId ->
+                navController.navigate(route = "${Screens.SubjectDetail.route}/$subjectId")
+            }
+        )
+    }
+}
+
+@ExperimentalFoundationApi
+@ExperimentalCoilApi
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
+fun NavGraphBuilder.addSubjectDetail(
+    navController: NavController,
+    imageLoader: ImageLoader,
+) {
+    composable(
+        route = Screens.SubjectDetail.route + "/{subjectId}",
+        arguments = Screens.SubjectDetail.arguments,
+        enterTransition = {
+            slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(300)
+            )
+        }
+    ) {
+        val viewModel: SubjectDetailViewModel = hiltViewModel()
+        SubjectDetailScreen(
+            state = viewModel.state.value,
+            imageLoader = imageLoader,
+            events = viewModel::onTriggerEvent,
+            onNavigateUp = navController::popBackStack
         )
     }
 }

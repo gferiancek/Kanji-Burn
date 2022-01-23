@@ -4,7 +4,7 @@ package com.gavinferiancek.subject_domain
 abstract class Subject(
     open val id: Int,
     open val level: Int,
-    open val characters: String?,
+    open val characters: String,
     open val meanings: List<Meaning>,
     open val auxiliaryMeanings: List<AuxiliaryMeaning>,
     open val meaningMnemonic: String,
@@ -24,7 +24,7 @@ abstract class Subject(
 data class Radical(
     override val id: Int,
     override val level: Int,
-    override val characters: String?,
+    override val characters: String,
     override val meanings: List<Meaning>,
     override val auxiliaryMeanings: List<AuxiliaryMeaning>,
     override val meaningMnemonic: String,

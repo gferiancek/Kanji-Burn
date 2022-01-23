@@ -63,7 +63,7 @@ fun SubjectDtoWrapper.toSubject(): Subject {
             Radical(
                 id = id,
                 level = data.level,
-                characters = data.characters,
+                characters = data.characters?: "",
                 meanings = data.meanings.toMeaningList(),
                 auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
                 meaningMnemonic = data.meaningMnemonic,

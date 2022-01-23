@@ -1,9 +1,11 @@
 package com.gavinferiancek.ui_subjectlist.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,6 +30,7 @@ import com.gavinferiancek.subject_domain.Vocab
 fun SubjectListItem(
     subject: Subject,
     imageLoader: ImageLoader,
+    onSelectSubject: (Int) -> Unit,
 ) {
     val backgroundColor = when(subject) {
         is Radical -> KanjiBurnTheme.colors.radical
@@ -35,13 +38,16 @@ fun SubjectListItem(
         else -> KanjiBurnTheme.colors.vocab
     }
     val textColor = KanjiBurnTheme.colors.onPrimary
-    Card(
+    Surface(
         modifier = Modifier
             .padding(1.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onSelectSubject(subject.id)
+            },
         elevation = 4.dp,
         shape = MaterialTheme.shapes.small,
-        backgroundColor = backgroundColor
+        color = backgroundColor,
     ) {
         Column(
             modifier = Modifier
@@ -69,7 +75,7 @@ fun SubjectListItem(
                     is Radical -> {
                         val characters = subject.characters
 
-                        if (characters != null) {
+                        if (characters.isNotBlank()) {
                             Text(
                                 text = characters,
                                 color = textColor,

@@ -9,9 +9,6 @@ import com.gavinferiancek.core.domain.DataState
 import com.gavinferiancek.core.domain.UIComponent
 import com.gavinferiancek.subject_interactors.GetSubjects
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject

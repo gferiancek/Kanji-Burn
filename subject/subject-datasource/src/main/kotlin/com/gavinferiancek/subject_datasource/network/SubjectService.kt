@@ -8,8 +8,6 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
 import io.ktor.util.*
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.polymorphic
 
 
 interface SubjectService {
@@ -18,6 +16,11 @@ interface SubjectService {
         apiKey: String,
         nextPage: Int?,
     ): SubjectResponse
+
+    suspend fun getSubjectById(
+        apiKey: String,
+        id: Int,
+    ): SubjectDtoWrapper
 
     companion object Factory {
         fun build(): SubjectService {

@@ -6,4 +6,7 @@ apply {
 dependencies {
     "implementation"(project(Modules.core))
     "implementation"(Compose.iconsExtended)
+
+    "implementation"(Accompanist.pager)
+    "implementation"(Accompanist.pagerIndicator)
 }
