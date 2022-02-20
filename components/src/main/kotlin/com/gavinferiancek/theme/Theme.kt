@@ -15,6 +15,7 @@ data class KanjiBurnColors(
     val radical: Color,
     val kanji: Color,
     val vocab: Color,
+    val success: Color,
 ) {
     val primary: Color get() = material.primary
     val primaryVariant: Color get() = material.primaryVariant
@@ -51,6 +52,7 @@ val LocalKanjiBurnColors = staticCompositionLocalOf {
         radical = Color.Unspecified,
         kanji = Color.Unspecified,
         vocab = Color.Unspecified,
+        success = Color.Unspecified
     )
 }
 
@@ -67,6 +69,7 @@ private val DarkColorPalette = KanjiBurnColors(
     radical = RadicalBackgroundColor,
     kanji = KanjiBackgroundColor,
     vocab = VocabBackgroundColor,
+    success = Green
 )
 
 private val LightColorPalette = KanjiBurnColors(
@@ -84,6 +87,7 @@ private val LightColorPalette = KanjiBurnColors(
     radical = RadicalBackgroundColor,
     kanji = KanjiBackgroundColor,
     vocab = VocabBackgroundColor,
+    success = Green,
 )
 
 @Composable

@@ -1,5 +1,6 @@
 package com.gavinferiancek.ui_subjectlist.di
 
+import com.gavinferiancek.subject_interactors.FilterSubjects
 import com.gavinferiancek.subject_interactors.GetSubjects
 import com.gavinferiancek.subject_interactors.SubjectInteractors
 import dagger.Module
@@ -18,5 +19,13 @@ object SubjectListModule {
         interactors: SubjectInteractors,
     ): GetSubjects {
         return interactors.getSubjects
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideFilterSubjects(
+        interactors: SubjectInteractors,
+    ): FilterSubjects {
+        return interactors.filterSubjects
     }
 }

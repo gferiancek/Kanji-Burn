@@ -29,7 +29,6 @@ fun BaseScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colors.background)
         ) {
-
             if (progressBarState is ProgressBarState.Loading) CircularIndeterminateProgressBar()
             else content()
         }

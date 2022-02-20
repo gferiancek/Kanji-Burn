@@ -4,7 +4,8 @@ import com.gavinferiancek.subject_datasource.network.SubjectService
 
 data class SubjectInteractors(
     val getSubjects: GetSubjects,
-    val getSubjectById: GetSubjectById
+    val getSubjectById: GetSubjectById,
+    val filterSubjects: FilterSubjects,
 ) {
     companion object Factory {
         fun build(): SubjectInteractors {
@@ -16,7 +17,8 @@ data class SubjectInteractors(
                 ),
                 getSubjectById = GetSubjectById(
                     service = service
-                )
+                ),
+                filterSubjects = FilterSubjects(),
             )
         }
     }

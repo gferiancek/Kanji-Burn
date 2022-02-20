@@ -29,6 +29,8 @@ import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
 fun SubjectListToolBar(
     query: String,
     onQueryChanged: (String) -> Unit,
+    onExecuteSearch: () -> Unit,
+    onShowFilterDialog: () -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -43,11 +45,12 @@ fun SubjectListToolBar(
         ) {
             TextField(
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
+                    .fillMaxWidth(0.90f)
                     .padding(start = 8.dp),
                 value = query,
-                onValueChange = {
-                    onQueryChanged(it)
+                onValueChange = { query ->
+                    onQueryChanged(query)
+                    onExecuteSearch()
                 },
                 label = {
                     Text(
@@ -63,6 +66,7 @@ fun SubjectListToolBar(
                     onSearch = {
                         keyboardController?.hide()
                         focusManager.clearFocus()
+                        onExecuteSearch()
                     },
                 ),
                 leadingIcon = {
@@ -82,16 +86,16 @@ fun SubjectListToolBar(
                     cursorColor = KanjiBurnTheme.colors.onPrimary,
                 ),
             )
-            Icon(
+            IconButton(
                 modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .clickable {
-                        /* TODO */
-                    }
                     .padding(8.dp),
-                imageVector = Icons.Rounded.FilterList,
-                contentDescription = "Filter Icon"
-            )
+                onClick = onShowFilterDialog,
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.FilterList,
+                    contentDescription = "Filter Icon"
+                )
+            }
         }
     }
 }

@@ -74,13 +74,13 @@ fun NavGraphBuilder.addSubjectList(
         route = Screens.SubjectList.route,
         exitTransition = {
             slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                towards = AnimatedContentScope.SlideDirection.Left,
                 animationSpec = tween(300)
             )
         },
         popEnterTransition = {
             slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                towards = AnimatedContentScope.SlideDirection.Right,
                 animationSpec = tween(300)
             )
         }
@@ -109,11 +109,13 @@ fun NavGraphBuilder.addSubjectDetail(
         route = Screens.SubjectDetail.route + "/{subjectId}",
         arguments = Screens.SubjectDetail.arguments,
         enterTransition = {
-            slideIntoContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+            slideIntoContainer(
+                towards = AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(300))
         },
         popExitTransition = {
             slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                towards = AnimatedContentScope.SlideDirection.Right,
                 animationSpec = tween(300)
             )
         }
