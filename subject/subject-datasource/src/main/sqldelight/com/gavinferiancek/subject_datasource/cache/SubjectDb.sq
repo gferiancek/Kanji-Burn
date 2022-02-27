@@ -1,0 +1,48 @@
+import com.gavinferiancek.subject_domain.AuxiliaryMeaning;
+import com.gavinferiancek.subject_domain.ContextSentence;
+import com.gavinferiancek.subject_domain.Meaning;
+import com.gavinferiancek.subject_domain.PronunciationAudio;
+import com.gavinferiancek.subject_domain.Reading;
+import kotlin.collections.List;
+
+CREATE TABLE  subjectEntity(
+    id INTEGER NOT NULL PRIMARY KEY,
+    type TEXT NOT NULL,
+    level INTEGER NOT NULL,
+    characters TEXT NOT NULL,
+    meanings TEXT AS List<Meaning> NOT NULL,
+    auxiliaryMeanings TEXT AS List<AuxiliaryMeaning> NOT NULL,
+    meaningMnemonic TEXT NOT NULL,
+    lessonPosition INTEGER NOT NULL,
+    srsSystem INTEGER NOT NULL,
+    readings TEXT AS List<Reading> NOT NULL,
+    /** end of columns present in all subjects, further columns will default to "" if not present */
+    meaningHint TEXT NOT NULL,
+    readingMnemonic TEXT NOT NULL,
+    readingHint TEXT NOT NULL,
+    characterImage TEXT NOT NULL,
+    amalgamationSubjectIds TEXT AS List<Int> NOT NULL,
+    componentSubjectIds TEXT AS List<Int> NOT NULL,
+    visuallySimilarSubjectIds TEXT AS List<Int> NOT NULL,
+    partsOfSpeech TEXT AS List<String> NOT NULL,
+    contextSentences TEXT AS List<ContextSentence> NOT NULL,
+    pronunciationAudios TEXT AS List<PronunciationAudio> NOT NULL
+);
+
+getSubjectById:
+SELECT *
+FROM subjectEntity
+WHERE id = :id;
+
+getAllSubjects:
+SELECT *
+FROM subjectEntity;
+
+insertSubject:
+INSERT OR REPLACE
+INTO subjectEntity
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?);
+
+deleteSubjectFromId:
+DELETE FROM subjectEntity
+WHERE id = :id;

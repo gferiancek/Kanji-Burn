@@ -3,8 +3,19 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "KanjiBurn"
 include ':app'
+include ':core'
+include ':components'
+
+include ':subject'
+include ':subject:subject-datasource'
+include ':subject:subject-datasource-test'
+include ':subject:subject-domain'
+include ':subject:subject-interactors'
+include ':subject:ui-subjectDetail'
+include ':subject:ui-subjectList'
+
+
