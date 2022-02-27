@@ -4,6 +4,7 @@ import com.gavinferiancek.subject_domain.Kanji
 import com.gavinferiancek.subject_domain.Radical
 import com.gavinferiancek.subject_domain.Subject
 import com.gavinferiancek.subject_domain.Vocab
+import com.gavinferiancek.subjectdatasource.cache.SubjectEntity
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -116,4 +117,88 @@ fun SubjectDtoWrapper.toSubject(): Subject {
 
 fun List<SubjectDtoWrapper>.toSubjectList(): List<Subject> {
     return map { it.toSubject() }
+}
+
+fun SubjectDtoWrapper.toSubjectEntity(): SubjectEntity {
+    return when(this) {
+        is SubjectDtoWrapper.RadicalDtoWrapper -> {
+            SubjectEntity(
+                id = id.toLong(),
+                type = "radical",
+                level = data.level.toLong(),
+                characters = data.characters?: "",
+                meanings = data.meanings.toMeaningList(),
+                auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
+                meaningMnemonic = data.meaningMnemonic,
+                lessonPosition = data.lessonPosition.toLong(),
+                srsSystem = data.srsSystem.toLong(),
+                readings = listOf(),
+                amalgamationSubjectIds = data.amalgamationSubjectIds,
+                characterImage = data.characterImages.toCharacterImageString(),
+                // Rest of fields not present in Radical
+                meaningHint = "",
+                readingMnemonic = "",
+                readingHint = "",
+                componentSubjectIds = listOf(),
+                visuallySimilarSubjectIds = listOf(),
+                partsOfSpeech = listOf(),
+                contextSentences = listOf(),
+                pronunciationAudios = listOf()
+            )
+        }
+        is SubjectDtoWrapper.KanjiDtoWrapper -> {
+            SubjectEntity(
+                id = id.toLong(),
+                type = "kanji",
+                level = data.level.toLong(),
+                characters = data.characters,
+                meanings = data.meanings.toMeaningList(),
+                auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
+                meaningMnemonic = data.meaningMnemonic,
+                lessonPosition = data.lessonPosition.toLong(),
+                srsSystem = data.srsSystem.toLong(),
+                readings = data.readings.toReadingList(),
+                meaningHint = data.meaningHint ?: "",
+                readingMnemonic = data.readingMnemonic,
+                readingHint = data.readingHint,
+                componentSubjectIds = data.componentSubjectIds,
+                visuallySimilarSubjectIds = data.visuallySimilarSubjectIds,
+                // Rest of fields not present in Kanji
+                characterImage = "",
+                amalgamationSubjectIds = listOf(),
+                partsOfSpeech = listOf(),
+                contextSentences = listOf(),
+                pronunciationAudios = listOf(),
+            )
+        }
+        is SubjectDtoWrapper.VocabDtoWrapper -> {
+            SubjectEntity(
+                id = id.toLong(),
+                type = "vocab",
+                level = data.level.toLong(),
+                characters = data.characters,
+                meanings = data.meanings.toMeaningList(),
+                auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
+                meaningMnemonic = data.meaningMnemonic,
+                lessonPosition = data.lessonPosition.toLong(),
+                srsSystem = data.srsSystem.toLong(),
+                readings = data.readings.toReadingList(),
+                readingMnemonic = data.readingMnemonic,
+                componentSubjectIds = data.componentSubjectIds,
+                partsOfSpeech = data.partsOfSpeech,
+                contextSentences = data.contextSentences.toContextSentenceList(),
+                pronunciationAudios = data.pronunciationAudios.toPronunciationAudioList(),
+                // Rest of fields not present in Vocab
+                characterImage = "",
+                amalgamationSubjectIds = listOf(),
+                visuallySimilarSubjectIds = listOf(),
+                meaningHint = "",
+                readingHint = "",
+            )
+        }
+    }
+}
+
+fun List<SubjectDtoWrapper>.toSubjectEntityList(): List<SubjectEntity> {
+    return map { it.toSubjectEntity() }
 }

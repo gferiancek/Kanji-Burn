@@ -1,5 +1,6 @@
 package com.gavinferiancek.ui_subjectdetail.ui
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -63,6 +64,7 @@ fun SubjectDetailScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+            Log.d("TypeConverterTest", state.subject.toString())
             state.subject?.let {
                 SubjectDetailHeader(
                     state = state,

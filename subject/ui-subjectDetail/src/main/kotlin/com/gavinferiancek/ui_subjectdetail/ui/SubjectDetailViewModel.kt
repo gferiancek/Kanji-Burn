@@ -48,7 +48,15 @@ constructor(
                     state.value = state.value.copy(subject = dataState.data)
                 }
                 is DataState.Response -> {
-                    Log.d("SubjectDetailViewModel", (dataState.uiComponent as UIComponent.None).message)
+                    when (dataState.uiComponent) {
+                        is UIComponent.None -> {
+                            Log.d("SubjectDetailViewModel", (dataState.uiComponent as UIComponent.None).message)
+                        }
+                        is UIComponent.SnackBar -> {}
+                        is UIComponent.Dialog -> {
+                            // Update state to show dialog with title/error
+                        }
+                    }
                 }
             }
         }.launchIn(viewModelScope)

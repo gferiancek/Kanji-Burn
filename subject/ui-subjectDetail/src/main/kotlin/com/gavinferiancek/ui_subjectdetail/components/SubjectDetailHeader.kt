@@ -1,5 +1,6 @@
 package com.gavinferiancek.ui_subjectdetail.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
@@ -45,6 +46,7 @@ fun SubjectDetailHeader(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
+                Log.d("TypeConverterTest", state.subject.toString())
                 when (state.subject) {
                     is Radical -> {
                         if (state.subject.characters.isNotBlank()) {
