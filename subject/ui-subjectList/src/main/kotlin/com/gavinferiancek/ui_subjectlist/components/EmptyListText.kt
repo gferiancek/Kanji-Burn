@@ -3,6 +3,7 @@ package com.gavinferiancek.ui_subjectlist.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,7 +21,7 @@ fun EmptyListText() {
     ) {
         Text(
             text = "空っぽ",
-            fontSize = 36.sp,
+            style = MaterialTheme.typography.h1,
             color = Color.DarkGray
         )
     }

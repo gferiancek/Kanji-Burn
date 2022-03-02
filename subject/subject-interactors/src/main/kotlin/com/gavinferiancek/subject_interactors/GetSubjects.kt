@@ -7,12 +7,7 @@ import com.gavinferiancek.subject_datasource.cache.SubjectCache
 import com.gavinferiancek.subject_datasource.network.SubjectService
 import com.gavinferiancek.subject_datasource.network.model.SubjectDtoWrapper
 import com.gavinferiancek.subject_datasource.network.model.toSubjectEntityList
-import com.gavinferiancek.subject_datasource.network.model.toSubjectList
-import com.gavinferiancek.subject_domain.Kanji
-import com.gavinferiancek.subject_domain.Radical
 import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subject_domain.Vocab
-import com.gavinferiancek.subjectdatasource.cache.SubjectEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -53,9 +48,9 @@ class GetSubjects(
             // SubjectListScreen uses a ViewPager to show separate list for each type of subject.
             // We return a list of lists so that we can sync that to the TabRow. (1st tab = first list, etc)
             val instancedSubjects = listOf(
-                cachedSubjects.filterIsInstance<Radical>(),
-                cachedSubjects.filterIsInstance<Kanji>(),
-                cachedSubjects.filterIsInstance<Vocab>(),
+                cachedSubjects.filterIsInstance<Subject.Radical>(),
+                cachedSubjects.filterIsInstance<Subject.Kanji>(),
+                cachedSubjects.filterIsInstance<Subject.Vocab>(),
             )
             emit(DataState.Data(data = instancedSubjects))
 

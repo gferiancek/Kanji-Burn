@@ -1,6 +1,7 @@
 package com.gavinferiancek.ui_subjectlist.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -9,7 +10,6 @@ import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.components.BaseHorizontalTabRow
 import com.gavinferiancek.components.BaseScreen
 import com.gavinferiancek.core.domain.UIComponentState
-import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
 import com.gavinferiancek.ui_subjectlist.components.SubjectListFilterDialog
 import com.gavinferiancek.ui_subjectlist.components.SubjectListHorizontalPager
 import com.gavinferiancek.ui_subjectlist.components.SubjectListToolBar
@@ -56,7 +56,7 @@ fun SubjectListScreen(
         BaseHorizontalTabRow(
             pagerState = pagerState,
             tabData = tabData,
-            tabColor = KanjiBurnTheme.colors.primary,
+            tabColor = MaterialTheme.colors.primaryVariant,
             scope = rememberCoroutineScope(),
         ) {
             SubjectListHorizontalPager(

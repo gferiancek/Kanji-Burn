@@ -1,14 +1,8 @@
 package com.gavinferiancek.kanjiburn.ui.navigation
 
-import android.graphics.drawable.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavArgument
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.gavinferiancek.kanjiburn.R
 
 sealed class Screens(
     val route: String,
@@ -29,7 +23,7 @@ sealed class Screens(
         arguments = listOf(
             navArgument("subjectId") {
                 type = NavType.IntType
-            }
+            },
         ),
     )
 

@@ -1,6 +1,5 @@
 package com.gavinferiancek.ui_subjectlist.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,10 +8,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FilterList
-import androidx.compose.material.icons.rounded.MoreVert
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
@@ -20,9 +17,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
+import com.gavinferiancek.theme.NotoSansTypography
+import com.gavinferiancek.theme.spacing
 
 @ExperimentalComposeUiApi
 @Composable
@@ -37,7 +33,7 @@ fun SubjectListToolBar(
     Surface(
         modifier = Modifier
             .fillMaxWidth(),
-        color = KanjiBurnTheme.colors.primary,
+        color = MaterialTheme.colors.primaryVariant,
     ) {
         Row(
             modifier = Modifier
@@ -46,7 +42,7 @@ fun SubjectListToolBar(
             TextField(
                 modifier = Modifier
                     .fillMaxWidth(0.90f)
-                    .padding(start = 8.dp),
+                    .padding(start = MaterialTheme.spacing.small),
                 value = query,
                 onValueChange = { query ->
                     onQueryChanged(query)
@@ -55,8 +51,8 @@ fun SubjectListToolBar(
                 label = {
                     Text(
                         text = "Search",
-                        color = KanjiBurnTheme.colors.onPrimary,
-                    )
+                        color = MaterialTheme.colors.onPrimary,
+                        )
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -73,22 +69,22 @@ fun SubjectListToolBar(
                     Icon(
                         imageVector = Icons.Rounded.Search,
                         contentDescription = "Search Icon",
-                        tint = KanjiBurnTheme.colors.onPrimary,
+                        tint = MaterialTheme.colors.onPrimary,
                     )
                 },
                 textStyle = TextStyle(
-                    color = KanjiBurnTheme.colors.onPrimary,
+                    color = MaterialTheme.colors.onPrimary,
                 ),
                 colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = KanjiBurnTheme.colors.primary,
-                    unfocusedIndicatorColor = KanjiBurnTheme.colors.primary,
-                    focusedIndicatorColor = KanjiBurnTheme.colors.primary,
-                    cursorColor = KanjiBurnTheme.colors.onPrimary,
+                    backgroundColor = MaterialTheme.colors.primaryVariant,
+                    unfocusedIndicatorColor = MaterialTheme.colors.primaryVariant,
+                    focusedIndicatorColor = MaterialTheme.colors.primaryVariant,
+                    cursorColor = MaterialTheme.colors.onPrimary,
                 ),
             )
             IconButton(
                 modifier = Modifier
-                    .padding(8.dp),
+                    .padding(MaterialTheme.spacing.small),
                 onClick = onShowFilterDialog,
             ) {
                 Icon(

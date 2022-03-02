@@ -1,15 +1,9 @@
 package com.gavinferiancek.ui_subjectdetail.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
-import com.gavinferiancek.subject_domain.Kanji
-import com.gavinferiancek.subject_domain.Radical
 import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subject_domain.Vocab
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
@@ -27,7 +21,7 @@ fun SubjectDetailHorizontalPager(
         state = pagerState
     ) { page ->
         when (subject) {
-            is Radical -> {
+            is Subject.Radical -> {
                 when (page) {
                     0 -> {
                         NamePagerItem(
@@ -48,10 +42,10 @@ fun SubjectDetailHorizontalPager(
                     }
                 }
             }
-            is Kanji -> {
+            is Subject.Kanji -> {
 
             }
-            is Vocab -> {
+            is Subject.Vocab -> {
 
             }
         }
