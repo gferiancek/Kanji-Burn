@@ -1,9 +1,6 @@
 package com.gavinferiancek.subject_datasource.network.model
 
-import com.gavinferiancek.subject_domain.Kanji
-import com.gavinferiancek.subject_domain.Radical
 import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subject_domain.Vocab
 import com.gavinferiancek.subjectdatasource.cache.SubjectEntity
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
@@ -56,67 +53,6 @@ object SubjectDtoWrapperSerializer : JsonContentPolymorphicSerializer<SubjectDto
             else -> throw Exception("Unknown Module: key 'type' not found or does not matches any module type")
         }
     }
-}
-
-fun SubjectDtoWrapper.toSubject(): Subject {
-    return when(this) {
-        is SubjectDtoWrapper.RadicalDtoWrapper -> {
-            Radical(
-                id = id,
-                level = data.level,
-                characters = data.characters?: "",
-                meanings = data.meanings.toMeaningList(),
-                auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
-                meaningMnemonic = data.meaningMnemonic,
-                lessonPosition = data.lessonPosition,
-                srsSystem = data.srsSystem,
-                amalgamationSubjectIds = data.amalgamationSubjectIds,
-                characterImage = data.characterImages.toCharacterImageString()
-            )
-        }
-        is SubjectDtoWrapper.KanjiDtoWrapper -> {
-            Kanji(
-                id = id,
-                level = data.level,
-                characters = data.characters,
-                meanings = data.meanings.toMeaningList(),
-                auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
-                meaningMnemonic = data.meaningMnemonic,
-                lessonPosition = data.lessonPosition,
-                srsSystem = data.srsSystem,
-                readings = data.readings.toReadingList(),
-                amalgamationSubjectIds = data.amalgamationSubjectIds,
-                componentSubjectIds = data.componentSubjectIds,
-                visuallySimilarSubjectIds = data.visuallySimilarSubjectIds,
-                meaningHint = data.meaningHint,
-                readingMnemonic = data.readingMnemonic,
-                readingHint = data.readingHint
-            )
-
-        }
-        is SubjectDtoWrapper.VocabDtoWrapper -> {
-            Vocab(
-                id = id,
-                level = data.level,
-                characters = data.characters,
-                meanings = data.meanings.toMeaningList(),
-                auxiliaryMeanings = data.auxiliaryMeanings.toAuxiliaryMeaningList(),
-                meaningMnemonic = data.meaningMnemonic,
-                lessonPosition = data.lessonPosition,
-                srsSystem = data.srsSystem,
-                readings = data.readings.toReadingList(),
-                readingMnemonic = data.readingMnemonic,
-                partsOfSpeech = data.partsOfSpeech,
-                componentSubjectIds = data.componentSubjectIds,
-                contextSentences = data.contextSentences.toContextSentenceList(),
-                pronunciationAudios = data.pronunciationAudios.toPronunciationAudioList()
-            )
-        }
-    }
-}
-
-fun List<SubjectDtoWrapper>.toSubjectList(): List<Subject> {
-    return map { it.toSubject() }
 }
 
 fun SubjectDtoWrapper.toSubjectEntity(): SubjectEntity {

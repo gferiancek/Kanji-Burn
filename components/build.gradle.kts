@@ -9,4 +9,6 @@ dependencies {
 
     "implementation"(Accompanist.pager)
     "implementation"(Accompanist.pagerIndicator)
+
+    "implementation"(Coil.coil)
 }

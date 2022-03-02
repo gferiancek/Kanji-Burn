@@ -1,18 +1,12 @@
 package com.gavinferiancek.subject_datasource.cache.model
 
-import com.gavinferiancek.subject_domain.Kanji
-import com.gavinferiancek.subject_domain.Radical
 import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subject_domain.Vocab
 import com.gavinferiancek.subjectdatasource.cache.SubjectEntity
-
-// amalgationIds and other List<Int> can be stored in DB as strings with list.joinToString(separator = ",").
-// To convert back use amalString.removeSurrounding("[","]").split(",").map{ it.toInt() }
 
 fun SubjectEntity.toSubject(): Subject {
     return when(type) {
         "radical" -> {
-            Radical(
+            Subject.Radical(
                 id = id.toInt(),
                 level = level.toInt(),
                 characters = characters,
@@ -21,13 +15,12 @@ fun SubjectEntity.toSubject(): Subject {
                 meaningMnemonic = meaningMnemonic,
                 lessonPosition = lessonPosition.toInt(),
                 srsSystem = srsSystem.toInt(),
-                readings = readings,
                 amalgamationSubjectIds = amalgamationSubjectIds,
                 characterImage = characterImage
             )
         }
         "kanji" -> {
-            Kanji(
+            Subject.Kanji(
                 id = id.toInt(),
                 level = level.toInt(),
                 characters = characters,
@@ -46,7 +39,7 @@ fun SubjectEntity.toSubject(): Subject {
             )
         }
         else -> {
-            Vocab(
+            Subject.Vocab(
                 id = id.toInt(),
                 level = level.toInt(),
                 characters = characters,
