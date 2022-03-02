@@ -7,14 +7,12 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
+import com.gavinferiancek.theme.spacing
 
 @Composable
 fun SortOrderFilterSelector(
@@ -45,15 +43,15 @@ fun SortOrderFilterSelector(
         ) {
             Checkbox(
                 modifier = Modifier
-                    .padding(end = 4.dp)
+                    .padding(end = MaterialTheme.spacing.extraSmall)
                     .align(Alignment.CenterVertically),
                 checked = isSortOrderSelected,
                 onCheckedChange = { filterBySortOrder() },
-                colors = CheckboxDefaults.colors(KanjiBurnTheme.colors.primary),
+                colors = CheckboxDefaults.colors(MaterialTheme.colors.primary),
             )
             Text(
                 text = sortOrderText,
-                fontSize = 22.sp
+                style = MaterialTheme.typography.h3,
             )
         }
         AnimatedVisibility(
@@ -68,7 +66,7 @@ fun SortOrderFilterSelector(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 24.dp),
+                    .padding(start = MaterialTheme.spacing.large),
             ) {
                 Row(
                     modifier = Modifier
@@ -83,14 +81,15 @@ fun SortOrderFilterSelector(
                 ) {
                     Checkbox(
                         modifier = Modifier
-                            .padding(end = 4.dp)
+                            .padding(end = MaterialTheme.spacing.extraSmall)
                             .align(Alignment.CenterVertically),
                         checked = isAscSelected,
                         onCheckedChange = { orderAsc() },
-                        colors = CheckboxDefaults.colors(KanjiBurnTheme.colors.primary),
+                        colors = CheckboxDefaults.colors(MaterialTheme.colors.primary),
                     )
                     Text(
                         text = ascText,
+                        style = MaterialTheme.typography.body2
                     )
                 }
                 Row(
@@ -106,14 +105,15 @@ fun SortOrderFilterSelector(
                 ) {
                     Checkbox(
                         modifier = Modifier
-                            .padding(end = 4.dp)
+                            .padding(end = MaterialTheme.spacing.extraSmall)
                             .align(Alignment.CenterVertically),
                         checked = isDescSelected,
                         onCheckedChange = { orderDesc() },
-                        colors = CheckboxDefaults.colors(KanjiBurnTheme.colors.primary),
+                        colors = CheckboxDefaults.colors(MaterialTheme.colors.primary),
                     )
                     Text(
                         text = descText,
+                        style = MaterialTheme.typography.body2
                     )
                 }
             }

@@ -7,11 +7,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.gavinferiancek.core.domain.FilterOrder
-import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
 import com.gavinferiancek.subject_domain.SubjectFilter
+import com.gavinferiancek.theme.accept
+import com.gavinferiancek.theme.spacing
 
 @Composable
 fun SubjectListFilterDialog(
@@ -24,9 +23,9 @@ fun SubjectListFilterDialog(
         title = {
                 Text(
                     modifier = Modifier
-                        .padding(bottom = 32.dp),
+                        .padding(bottom = MaterialTheme.spacing.large),
                     text = "Filter Options",
-                    fontSize = 32.sp
+                    style = MaterialTheme.typography.h2,
                 )
         },
         text = {
@@ -38,9 +37,9 @@ fun SubjectListFilterDialog(
                     ) {
                         Text(
                             text = "Sort By",
-                            fontSize = 22.sp
+                            style = MaterialTheme.typography.h3,
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                         SortOrderFilterSelector(
                             sortOrderText = SubjectFilter.Level().uiValue,
                             isSortOrderSelected = subjectFilter is SubjectFilter.Level,
@@ -110,10 +109,10 @@ fun SubjectListFilterDialog(
                                 )
                             },
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                         Text(
                             text = "Included Levels",
-                            fontSize = 22.sp
+                            style = MaterialTheme.typography.h3,
                         )
                     }
                 }
@@ -122,7 +121,7 @@ fun SubjectListFilterDialog(
         buttons = {
             Row(
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(MaterialTheme.spacing.small)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.End,
             ) {
@@ -132,7 +131,7 @@ fun SubjectListFilterDialog(
                     Icon(
                         imageVector = Icons.Rounded.Done,
                         contentDescription = "Done",
-                        tint = KanjiBurnTheme.colors.success
+                        tint = MaterialTheme.colors.accept,
                     )
                 }
             }

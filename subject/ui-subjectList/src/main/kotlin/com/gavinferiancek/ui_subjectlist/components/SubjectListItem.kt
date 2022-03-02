@@ -1,29 +1,22 @@
 package com.gavinferiancek.ui_subjectlist.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import com.gavinferiancek.kanjiburn.ui.theme.KanjiBurnTheme
-import com.gavinferiancek.subject_domain.Kanji
-import com.gavinferiancek.subject_domain.Radical
+import com.gavinferiancek.components.RadicalCharacterSelector
 import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subject_domain.Vocab
+import com.gavinferiancek.theme.kanji
+import com.gavinferiancek.theme.radical
+import com.gavinferiancek.theme.spacing
+import com.gavinferiancek.theme.vocab
 
 @ExperimentalCoilApi
 @Composable
@@ -32,22 +25,18 @@ fun SubjectListItem(
     imageLoader: ImageLoader,
     onSelectSubject: (Int) -> Unit,
 ) {
-    val backgroundColor = when(subject) {
-        is Radical -> KanjiBurnTheme.colors.radical
-        is Kanji -> KanjiBurnTheme.colors.kanji
-        else -> KanjiBurnTheme.colors.vocab
-    }
-    val textColor = KanjiBurnTheme.colors.onPrimary
     Surface(
         modifier = Modifier
-            .padding(1.dp)
+            .padding(MaterialTheme.spacing.listItemPadding)
             .fillMaxWidth()
-            .clickable {
-                onSelectSubject(subject.id)
-            },
-        elevation = 4.dp,
+            .clickable { onSelectSubject(subject.id) },
+        elevation = MaterialTheme.spacing.extraSmall,
         shape = MaterialTheme.shapes.small,
-        color = backgroundColor,
+        color = when(subject) {
+            is Subject.Radical -> MaterialTheme.colors.radical
+            is Subject.Kanji -> MaterialTheme.colors.kanji
+            is Subject.Vocab -> MaterialTheme.colors.vocab
+        },
     ) {
         Column(
             modifier = Modifier
@@ -56,102 +45,88 @@ fun SubjectListItem(
             Text(
                 modifier = Modifier
                     .padding(
-                        start = 8.dp,
-                        top = 2.dp,
+                        start = MaterialTheme.spacing.small,
+                        top = MaterialTheme.spacing.extraSmall,
                     ),
                 text = "Level ${subject.level}",
-                color = textColor,
-                fontSize = 10.sp
+                color = MaterialTheme.colors.onPrimary,
+                style = MaterialTheme.typography.overline,
             )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 2.dp),
+                    .padding(bottom = MaterialTheme.spacing.extraSmall),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
                 when (subject) {
-                    is Radical -> {
-                        val characters = subject.characters
-
-                        if (characters.isNotBlank()) {
-                            Text(
-                                text = characters,
-                                color = textColor,
-                                fontSize = 36.sp,
-                            )
-                        } else {
-                            Image(
-                                modifier = Modifier
-                                    .height(48.dp),
-                                painter = rememberImagePainter(
-                                    data = subject.characterImage,
-                                    imageLoader = imageLoader,
-                                ),
-                                contentDescription = "Picture of Radical, no ASCII form exists",
-                                contentScale = ContentScale.Inside,
-                                colorFilter = ColorFilter.tint(textColor)
-                            )
-                        }
+                    is Subject.Radical -> {
+                        RadicalCharacterSelector(
+                            characters = subject.getRadicalCharacters(),
+                            textStyle = MaterialTheme.typography.h2,
+                            imageLoader = imageLoader,
+                        )
                         Text(
                             text = subject.getPrimaryMeaning(),
-                            color = textColor,
-                            fontSize = 12.sp,
+                            color = MaterialTheme.colors.onPrimary,
+                            style = MaterialTheme.typography.caption,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
                     }
-                    is Kanji -> {
+                    is Subject.Kanji -> {
                         Text(
                             text = subject.characters,
-                            color = textColor,
-                            fontSize = 36.sp
+                            color = MaterialTheme.colors.onPrimary,
+                            style = MaterialTheme.typography.h2,
                         )
                         Text(
                             text = subject.getPrimaryReading(),
-                            color = textColor,
-                            fontSize = 18.sp,
+                            color = MaterialTheme.colors.onPrimary,
+                            style = MaterialTheme.typography.h4,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
                         Text(
                             text = subject.getPrimaryMeaning(),
-                            color = textColor,
-                            fontSize = 13.sp,
+                            color = MaterialTheme.colors.onPrimary,
+                            style = MaterialTheme.typography.caption,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
                     }
-                    is Vocab -> {
+                    is Subject.Vocab -> {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(
-                                    start = 8.dp,
-                                    end = 8.dp,
-                                    bottom = 2.dp,
+                                    start = MaterialTheme.spacing.small,
+                                    end = MaterialTheme.spacing.small,
+                                    bottom = MaterialTheme.spacing.extraSmall,
                                 ),
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
                                 text = subject.characters,
-                                color = textColor,
-                                fontSize = 36.sp
+                                color = MaterialTheme.colors.onPrimary,
+                                style = MaterialTheme.typography.h2,
                             )
                             Column(
                                 horizontalAlignment = Alignment.End
                             ) {
                                 Text(
                                     text = subject.getPrimaryReading(),
-                                    color = textColor,
+                                    color = MaterialTheme.colors.onPrimary,
+                                    style = MaterialTheme.typography.h4,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
                                 Text(
                                     text = subject.getPrimaryMeaning(),
-                                    color = textColor,
+                                    color = MaterialTheme.colors.onPrimary,
+                                    style = MaterialTheme.typography.caption,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
