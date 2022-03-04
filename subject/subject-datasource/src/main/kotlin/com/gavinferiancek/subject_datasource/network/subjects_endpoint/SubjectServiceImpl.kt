@@ -1,7 +1,8 @@
-package com.gavinferiancek.subject_datasource.network
+package com.gavinferiancek.subject_datasource.network.subjects_endpoint
 
-import com.gavinferiancek.subject_datasource.network.model.SubjectDtoWrapper
-import com.gavinferiancek.subject_datasource.network.model.SubjectResponse
+import com.gavinferiancek.subject_datasource.network.EndPoints
+import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.SubjectDtoWrapper
+import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.SubjectResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -12,7 +13,7 @@ class SubjectServiceImpl(
 
     override suspend fun getSubjects(
         apiKey: String,
-        nextPage: Int?,
+        url: String,
     ): SubjectResponse {
         return httpClient.get {
             headers {
@@ -20,17 +21,14 @@ class SubjectServiceImpl(
                     name = HttpHeaders.Authorization,
                     value = "Bearer $apiKey")
             }
-            url(urlString = EndPoints.SUBJECTS)
-            parameter(
-                key = "page_after_id",
-                value = nextPage,
-            )
+            url(urlString = url)
         }
     }
 
     override suspend fun getSubjectById(
         apiKey: String,
-        id: Int): SubjectDtoWrapper {
+        id: Int
+    ): SubjectDtoWrapper {
         return httpClient.get {
             headers {
                 append(

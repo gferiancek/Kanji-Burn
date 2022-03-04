@@ -1,20 +1,18 @@
-package com.gavinferiancek.subject_datasource.network
+package com.gavinferiancek.subject_datasource.network.subjects_endpoint
 
-import com.gavinferiancek.subject_datasource.network.model.SubjectDtoWrapper
-import com.gavinferiancek.subject_datasource.network.model.SubjectResponse
+import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.SubjectDtoWrapper
+import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.SubjectResponse
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
-import io.ktor.util.*
 
 
 interface SubjectService {
 
     suspend fun getSubjects(
         apiKey: String,
-        nextPage: Int?,
+        url: String,
     ): SubjectResponse
 
     suspend fun getSubjectById(
