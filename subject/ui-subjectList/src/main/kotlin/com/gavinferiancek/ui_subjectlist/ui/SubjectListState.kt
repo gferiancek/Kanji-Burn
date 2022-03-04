@@ -12,4 +12,5 @@ data class SubjectListState(
     val query: String = "",
     val subjectFilter: SubjectFilter = SubjectFilter.Level(),
     val filterDialogState: UIComponentState = UIComponentState.Hidden,
+    val tabData: List<String> = listOf("Radical", "Kanji", "Vocab"),
 )

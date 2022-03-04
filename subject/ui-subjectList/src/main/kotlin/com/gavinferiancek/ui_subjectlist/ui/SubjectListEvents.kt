@@ -22,4 +22,8 @@ sealed class SubjectListEvents {
     data class UpdateSubjectFilter(
         val subjectFilter: SubjectFilter,
     ): SubjectListEvents()
+
+    data class UpdateTabData(
+        val tabData: List<String>
+    ): SubjectListEvents()
 }

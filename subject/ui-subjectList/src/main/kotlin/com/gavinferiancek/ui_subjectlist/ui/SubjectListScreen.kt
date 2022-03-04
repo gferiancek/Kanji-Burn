@@ -3,6 +3,7 @@ package com.gavinferiancek.ui_subjectlist.ui
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import coil.ImageLoader
@@ -51,11 +52,10 @@ fun SubjectListScreen(
         }
     ) {
         val pagerState = rememberPagerState(initialPage = 0)
-        val tabData = listOf("Radical", "Kanji", "Vocabulary")
 
         BaseHorizontalTabRow(
             pagerState = pagerState,
-            tabData = tabData,
+            tabData = state.tabData,
             tabColor = MaterialTheme.colors.primaryVariant,
             scope = rememberCoroutineScope(),
         ) {

@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import com.gavinferiancek.theme.spacing
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
@@ -87,7 +88,7 @@ fun BaseHorizontalTabRow(
                                 Text(
                                     text = title,
                                     style = MaterialTheme.typography.h4,
-                                    maxLines = 1,
+                                    textAlign = TextAlign.Center,
                                 )
                             },
                             selected = pagerState.currentPage == index,
