@@ -7,12 +7,14 @@ dependencyResolutionManagement {
 }
 rootProject.name = "KanjiBurn"
 include ':app'
-include ':core'
 include ':components'
+
+include ':core'
+include ':core:core-domain'
+include ':core:core-cache'
 
 include ':subject'
 include ':subject:subject-datasource'
-include ':subject:subject-datasource-test'
 include ':subject:subject-domain'
 include ':subject:subject-interactors'
 include ':subject:ui-subjectDetail'

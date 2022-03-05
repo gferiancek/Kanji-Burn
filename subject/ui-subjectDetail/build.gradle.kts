@@ -4,7 +4,7 @@ apply {
 
 
 dependencies {
-    "implementation"(project(Modules.core))
+    "implementation"(project(Modules.coreDomain))
     "implementation"(project(Modules.components))
     "implementation"(project(Modules.subjectDomain))
     "implementation"(project(Modules.subjectInteractors))

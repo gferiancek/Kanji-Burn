@@ -10,9 +10,9 @@ data class SubjectInteractors(
     val filterSubjects: FilterSubjects,
 ) {
     companion object Factory {
-        fun build(sqlDriver: SqlDriver): SubjectInteractors {
+        fun build(cache: SubjectCache ): SubjectInteractors {
             val service = SubjectService.build()
-            val cache = SubjectCache.build(sqlDriver)
+
 
             return SubjectInteractors(
                 getSubjects = GetSubjects(
@@ -25,7 +25,5 @@ data class SubjectInteractors(
                 filterSubjects = FilterSubjects(),
             )
         }
-        val schema: SqlDriver.Schema = SubjectCache.schema
-        val databaseName: String = SubjectCache.databaseName
     }
 }

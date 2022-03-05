@@ -1,4 +1,4 @@
-package com.gavinferiancek.subject_datasource.cache.util
+package com.gavinferiancek.core_cache.util
 
 import com.google.gson.Gson
 import java.lang.reflect.Type

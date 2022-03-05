@@ -1,7 +1,6 @@
 package com.gavinferiancek.subject_datasource.network.model
 
-import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subjectdatasource.cache.SubjectEntity
+import com.gavinferiancek.corecache.cache.SubjectEntity
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

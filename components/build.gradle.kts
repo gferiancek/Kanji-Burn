@@ -4,7 +4,7 @@ apply {
 
 
 dependencies {
-    "implementation"(project(Modules.core))
+    "implementation"(project(Modules.coreDomain))
     "implementation"(Compose.iconsExtended)
 
     "implementation"(Accompanist.pager)

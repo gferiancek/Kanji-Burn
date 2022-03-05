@@ -41,8 +41,14 @@ FROM subjectEntity;
 insertSubject:
 INSERT OR REPLACE
 INTO subjectEntity
-VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?);
+VALUES ?;
 
 deleteSubjectFromId:
 DELETE FROM subjectEntity
+WHERE id = :id;
+
+getSubjectDetail:
+SELECT *
+FROM subjectEntity
+INNER JOIN reviewStatisticsEntity ON subjectEntity.id = reviewStatisticsEntity.subjectId
 WHERE id = :id;

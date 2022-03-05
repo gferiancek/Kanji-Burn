@@ -1,8 +1,7 @@
-package com.gavinferiancek.subject_datasource.network.subjects_endpoint
+package com.gavinferiancek.subject_datasource.network
 
-import com.gavinferiancek.subject_datasource.network.EndPoints
-import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.SubjectDtoWrapper
-import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.SubjectResponse
+import com.gavinferiancek.subject_datasource.network.model.SubjectDtoWrapper
+import com.gavinferiancek.subject_datasource.network.model.SubjectResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*

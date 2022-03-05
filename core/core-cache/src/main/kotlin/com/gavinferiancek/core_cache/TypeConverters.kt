@@ -1,7 +1,7 @@
-package com.gavinferiancek.subject_datasource.cache
+package com.gavinferiancek.core_cache
 
-import com.gavinferiancek.subject_datasource.cache.util.GsonParser
-import com.gavinferiancek.subject_datasource.cache.util.JsonParser
+import com.gavinferiancek.core_cache.util.GsonParser
+import com.gavinferiancek.core_cache.util.JsonParser
 import com.gavinferiancek.subject_domain.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

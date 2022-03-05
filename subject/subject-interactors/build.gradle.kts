@@ -4,9 +4,10 @@ apply {
 
 
 dependencies {
-    "implementation"(project(Modules.core))
+    "implementation"(project(Modules.coreDomain))
     "implementation"(project(Modules.subjectDataSource))
     "implementation"(project(Modules.subjectDomain))
 
+    "implementation"(SqlDelight.runtime)
     "implementation"(KotlinX.coroutinesCore)
 }

@@ -1,7 +1,7 @@
 package com.gavinferiancek.subject_datasource.cache.model
 
+import com.gavinferiancek.corecache.cache.SubjectEntity
 import com.gavinferiancek.subject_domain.Subject
-import com.gavinferiancek.subjectdatasource.cache.SubjectEntity
 
 fun SubjectEntity.toSubject(): Subject {
     return when(type) {

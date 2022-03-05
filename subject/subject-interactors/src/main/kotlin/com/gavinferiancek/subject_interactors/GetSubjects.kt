@@ -5,8 +5,8 @@ import com.gavinferiancek.core.domain.ProgressBarState
 import com.gavinferiancek.core.domain.UIComponent
 import com.gavinferiancek.subject_datasource.cache.SubjectCache
 import com.gavinferiancek.subject_datasource.network.EndPoints
-import com.gavinferiancek.subject_datasource.network.subjects_endpoint.SubjectService
-import com.gavinferiancek.subject_datasource.network.subjects_endpoint.model.toSubjectEntityList
+import com.gavinferiancek.subject_datasource.network.model.toSubjectEntityList
+import com.gavinferiancek.subject_datasource.network.SubjectService
 import com.gavinferiancek.subject_domain.Subject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow

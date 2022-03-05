@@ -1,9 +1,9 @@
 package com.gavinferiancek.kanjiburn.di
 
-import android.app.Application
+import com.gavinferiancek.core_cache.cache.KanjiBurnDatabase
+import com.gavinferiancek.subject_datasource.cache.SubjectCache
+import com.gavinferiancek.subject_datasource.cache.SubjectCacheImpl
 import com.gavinferiancek.subject_interactors.SubjectInteractors
-import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,22 +16,15 @@ object SubjectInteractorsModule {
 
     @Provides
     @Singleton
-    // Look at just using SubjectDatabase.schema instead and using string for name.
-    fun provideAndroidDriver(app: Application): SqlDriver {
-        return AndroidSqliteDriver(
-            schema = SubjectInteractors.schema,
-            context = app,
-            name = SubjectInteractors.databaseName,
-        )
+    fun provideSubjectCache(database: KanjiBurnDatabase): SubjectCache {
+        return SubjectCacheImpl(database)
     }
 
     @Provides
     @Singleton
     fun provideSubjectInteractors(
-        sqlDriver: SqlDriver,
+        cache: SubjectCache,
     ): SubjectInteractors {
-        return SubjectInteractors.build(
-            sqlDriver = sqlDriver
-        )
+        return SubjectInteractors.build(cache)
     }
 }
