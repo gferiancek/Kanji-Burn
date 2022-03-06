@@ -4,7 +4,7 @@ import android.app.Application
 import com.gavinferiancek.core_cache.*
 import com.gavinferiancek.core_cache.cache.KanjiBurnDatabase
 import com.gavinferiancek.corecache.cache.SubjectEntity
-import com.gavinferiancek.subject_interactors.SubjectInteractors
+import com.gavinferiancek.corecache.cache.SubjectEntityQueries
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
@@ -45,5 +45,11 @@ object DatabaseModule {
                 pronunciationAudiosAdapter = pronunciationAudiosAdapter,
             )
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideSubjectQueries(database: KanjiBurnDatabase): SubjectEntityQueries {
+        return database.subjectEntityQueries
     }
 }

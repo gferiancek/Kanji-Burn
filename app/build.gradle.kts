@@ -41,13 +41,20 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.components))
+
+    implementation(project(Modules.coreUi))
     implementation(project(Modules.coreDomain))
     implementation(project(Modules.coreCache))
-    implementation(project(Modules.subjectDataSource))
-    implementation(project(Modules.subjectInteractors))
-    implementation(project(Modules.ui_subjectDetail))
-    implementation(project(Modules.ui_subjectList))
+    implementation(project(Modules.coreNetwork))
+
+    implementation(project(Modules.reviewData))
+    implementation(project(Modules.reviewInteractors))
+    implementation(project(Modules.ui_reviewList))
+    implementation(project(Modules.ui_reviewDetail))
+
+    implementation(project(Modules.loginData))
+    implementation(project(Modules.loginInteractors))
+    implementation(project(Modules.ui_loginScreen))
 
     implementation(Accompanist.navigationAnimation)
     implementation(Accompanist.pager)

@@ -8,18 +8,24 @@ sealed class Screens(
     val route: String,
     val arguments: List<NamedNavArgument>,
 ) {
+
+    object Login: Screens(
+        route = "login",
+        arguments = emptyList(),
+    )
+
     object Dashboard: Screens(
         route = "dashboard",
         arguments = emptyList(),
     )
 
-    object SubjectList: Screens(
-        route = "subjectList",
+    object ReviewList: Screens(
+        route = "reviewList",
         arguments = emptyList(),
     )
 
-    object SubjectDetail: Screens(
-        route = "subjectDetail",
+    object ReviewDetail: Screens(
+        route = "reviewDetail",
         arguments = listOf(
             navArgument("subjectId") {
                 type = NavType.IntType

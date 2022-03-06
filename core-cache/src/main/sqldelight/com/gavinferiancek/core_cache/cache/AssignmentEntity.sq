@@ -1,0 +1,23 @@
+CREATE TABLE assignmentEntity (
+    subjectId INTEGER PRIMARY KEY NOT NULL,
+    lastUpdated TEXT NOT NULL,
+    subjectType TEXT NOT NULL,
+    srsStage INTEGER NOT NULL,
+    unlockedAt TEXT,
+    startedAt TEXT,
+    passedAt TEXT,
+    burnedAt TEXT,
+    availableAt TEXT,
+    resurrectedAt TEXT,
+    hidden INTEGER NOT NULL
+);
+
+getAllAssignments:
+SELECT *
+FROM assignmentEntity;
+
+insertAssignment:
+INSERT OR REPLACE
+INTO assignmentEntity
+VALUES ?;
+
