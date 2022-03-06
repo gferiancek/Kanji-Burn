@@ -6,18 +6,25 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "KanjiBurn"
+
 include ':app'
-include ':components'
 
-include ':core'
-include ':core:core-domain'
-include ':core:core-cache'
+include ':core-domain'
 
-include ':subject'
-include ':subject:subject-datasource'
-include ':subject:subject-domain'
-include ':subject:subject-interactors'
-include ':subject:ui-subjectDetail'
-include ':subject:ui-subjectList'
+include ':core-cache'
+include ':core-network'
+include ':core-ui'
+
+include ':login'
+include ':login:login-data'
+include ':login:login-interactors'
+include ':login:ui-login'
+
+include ':review'
+include ':review:review-data'
+include ':review:review-domain'
+include ':review:review-interactors'
+include ':review:ui-reviewDetail'
+include ':review:ui-reviewList'
 
 

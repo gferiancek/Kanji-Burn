@@ -1,0 +1,25 @@
+
+CREATE TABLE reviewStatisticsEntity (
+    subjectId INTEGER PRIMARY KEY NOT NULL,
+    lastUpdated TEXT NOT NULL,
+    subjectType TEXT NOT NULL,
+    meaningCorrect INTEGER NOT NULL,
+    meaningIncorrect INTEGER NOT NULL,
+    meaningMaxStreak INTEGER NOT NULL,
+    meaningCurrentSteak INTEGER NOT NULL,
+    readingCorrect INTEGER NOT NULL,
+    readingIncorrect INTEGER NOT NULL,
+    readingMaxStreak INTEGER NOT NULL,
+    readingCurrentStreak INTEGER NOT NULL,
+    percentageCorrect INTEGER NOT NULL,
+    hidden INTEGER NOT NULL
+);
+
+getAllReviewStatistics:
+SELECT *
+FROM reviewStatisticsEntity;
+
+insertReviewStatistics:
+INSERT OR REPLACE
+INTO reviewStatisticsEntity
+VALUES ?;

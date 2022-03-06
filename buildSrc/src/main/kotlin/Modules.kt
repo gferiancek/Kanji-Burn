@@ -1,15 +1,19 @@
 object Modules {
 
-    const val core = ":core"
-    const val coreDomain = ":core:core-domain"
-    const val coreCache = ":core:core-cache"
+    const val coreCache = ":core-cache"
+    const val coreDomain = ":core-domain"
+    const val coreNetwork = ":core-network"
+    const val coreUi = ":core-ui"
 
-    const val components = ":components"
+    const val login = ":login"
+    const val loginData = ":login:login-data"
+    const val loginInteractors = ":login:login-interactors"
+    const val ui_loginScreen = ":login:ui-login"
 
-    const val subject = ":subject"
-    const val subjectDataSource = ":subject:subject-datasource"
-    const val subjectDomain = ":subject:subject-domain"
-    const val subjectInteractors = ":subject:subject-interactors"
-    const val ui_subjectDetail = ":subject:ui-subjectDetail"
-    const val ui_subjectList = ":subject:ui-subjectList"
+    const val review = ":review"
+    const val reviewData = ":review:review-data"
+    const val reviewDomain = ":review:review-domain"
+    const val reviewInteractors = ":review:review-interactors"
+    const val ui_reviewDetail = ":review:ui-reviewDetail"
+    const val ui_reviewList = ":review:ui-reviewList"
 }

@@ -3,9 +3,10 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="KanjiBurn.app" target="11" />
-      <module name="KanjiBurn.components" target="11" />
-      <module name="KanjiBurn.subject.ui-subjectDetail" target="11" />
-      <module name="KanjiBurn.subject.ui-subjectList" target="11" />
+      <module name="KanjiBurn.core-ui" target="11" />
+      <module name="KanjiBurn.login.ui-login" target="11" />
+      <module name="KanjiBurn.review.ui-reviewDetail" target="11" />
+      <module name="KanjiBurn.review.ui-reviewList" target="11" />
       <module name="KanjiBurn2.buildSrc" target="11" />
     </bytecodeTargetLevel>
   </component>
