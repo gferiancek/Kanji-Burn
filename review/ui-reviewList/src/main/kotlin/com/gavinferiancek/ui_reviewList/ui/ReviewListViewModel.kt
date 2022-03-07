@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gavinferiancek.core_domain.state.DataState
 import com.gavinferiancek.core_domain.UIComponent
-import com.gavinferiancek.review_interactors.FilterSubjects
-import com.gavinferiancek.review_interactors.GetSubjectsFromCache
+import com.gavinferiancek.review_interactors.list.FilterSubjects
+import com.gavinferiancek.review_interactors.list.GetInnerSubjectListCounts
+import com.gavinferiancek.review_interactors.list.GetSubjectsFromCache
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -23,6 +24,7 @@ class ReviewListViewModel
 constructor(
     private val getSubjectsFromCache: GetSubjectsFromCache,
     private val filterSubjects: FilterSubjects,
+    private val getInnerSubjectListCounts: GetInnerSubjectListCounts,
 ) : ViewModel() {
     val state: MutableState<ReviewListState> = mutableStateOf(ReviewListState())
     private var filterJob: Job? = null
@@ -45,12 +47,9 @@ constructor(
             is ReviewListEvents.UpdateFilterDialogState -> {
                 state.value = state.value.copy(filterDialogState = event.uiComponentState)
             }
-            is ReviewListEvents.UpdateReviewFilter -> {
+            is ReviewListEvents.UpdateSubjectFilter -> {
                 state.value = state.value.copy(subjectFilter = event.subjectFilter)
                 filterSubjects()
-            }
-            is ReviewListEvents.UpdateTabData -> {
-                state.value = state.value.copy(tabData = event.tabData)
             }
         }
     }
@@ -63,7 +62,7 @@ constructor(
     private fun debounce(action: () -> Unit) {
         filterJob?.cancel()
         filterJob = viewModelScope.launch {
-            delay(300)
+            delay(250)
             action()
         }
     }
@@ -74,28 +73,10 @@ constructor(
             query = state.value.query,
             subjectFilter = state.value.subjectFilter,
         )
-        if (state.value.query.isNotBlank()) {
-            onTriggerEvent(
-                ReviewListEvents.UpdateTabData(
-                    tabData = listOf(
-                        "Radical\n(${filteredSubjects[0].count()})",
-                        "Kanji\n(${filteredSubjects[1].count()})",
-                        "Vocabulary\n(${filteredSubjects[2].count()})",
-                    )
-                )
-            )
-        } else {
-            onTriggerEvent(
-                ReviewListEvents.UpdateTabData(
-                    tabData = listOf(
-                        "Radical",
-                        "Kanji",
-                        "Vocabulary",
-                    )
-                )
-            )
-        }
-        state.value = state.value.copy(filteredSubjects = filteredSubjects)
+        state.value = state.value.copy(
+            filteredSubjects = filteredSubjects,
+            filteredListCount = getInnerSubjectListCounts.execute(filteredSubjects)
+        )
     }
 
     private fun getSubjects() {
@@ -105,8 +86,13 @@ constructor(
                     state.value = state.value.copy(progressBarState = dataState.progressBarState)
                 }
                 is DataState.Data -> {
-                    state.value = state.value.copy(subjects = dataState.data ?: emptyList())
-                    filterSubjects()
+                    dataState.data?.let { data ->
+                        state.value = state.value.copy(
+                            subjects = data,
+                            initialListCount = getInnerSubjectListCounts.execute(data)
+                        )
+                        filterSubjects()
+                    }
                 }
                 is DataState.Response -> {
                     when (dataState.uiComponent) {

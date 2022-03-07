@@ -55,13 +55,12 @@ fun SubjectListToolBar(
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Search,
+                    imeAction = ImeAction.Done,
                 ),
                 keyboardActions = KeyboardActions(
-                    onSearch = {
+                    onDone = {
                         keyboardController?.hide()
                         focusManager.clearFocus()
-                        onExecuteSearch()
                     },
                 ),
                 leadingIcon = {

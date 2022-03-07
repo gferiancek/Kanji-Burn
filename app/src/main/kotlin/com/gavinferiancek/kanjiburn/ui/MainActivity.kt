@@ -3,10 +3,8 @@ package com.gavinferiancek.kanjiburn.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -74,11 +72,6 @@ fun NavGraphBuilder.addLoginScreen(
 ) {
     composable(
         route = Screens.Login.route,
-        exitTransition = {
-            fadeOut(
-                animationSpec = tween(700)
-            )
-        },
     ) {
         val viewModel: LoginViewModel = hiltViewModel()
         LoginScreen(
@@ -105,15 +98,15 @@ fun NavGraphBuilder.addReviewListScreen(
         exitTransition = {
             slideOutOfContainer(
                 towards = AnimatedContentScope.SlideDirection.Left,
-                animationSpec = tween(300)
-            ) + fadeOut(animationSpec = tween(300))
+                animationSpec = tween(700)
+            ) + fadeOut(animationSpec = tween(700))
         },
         popEnterTransition = {
             slideIntoContainer(
                 towards = AnimatedContentScope.SlideDirection.Right,
-                animationSpec = tween(300)
-            )
-        }
+                animationSpec = tween(700)
+            ) + fadeIn(animationSpec = tween(700))
+        },
     ) {
         val viewModel: ReviewListViewModel = hiltViewModel()
         ReviewListScreen(
@@ -141,14 +134,15 @@ fun NavGraphBuilder.addReviewDetailScreen(
         enterTransition = {
             slideIntoContainer(
                 towards = AnimatedContentScope.SlideDirection.Left,
-                animationSpec = tween(300))
+                animationSpec = tween(700)
+            ) + fadeIn(animationSpec = tween(700))
         },
         popExitTransition = {
             slideOutOfContainer(
                 towards = AnimatedContentScope.SlideDirection.Right,
-                animationSpec = tween(300)
-            )
-        }
+                animationSpec = tween(700)
+            ) + fadeOut(animationSpec = tween(700))
+        },
     ) {
         val viewModel: ReviewDetailViewModel = hiltViewModel()
         ReviewDetailScreen(
