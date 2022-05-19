@@ -1,4 +1,4 @@
-package com.gavinferiancek.theme
+package com.gavinferiancek.core_ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

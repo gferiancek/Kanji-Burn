@@ -1,5 +1,6 @@
-package com.gavinferiancek.components
+package com.gavinferiancek.core_ui.components
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,14 +10,14 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import com.gavinferiancek.theme.spacing
+import com.gavinferiancek.core_ui.theme.spacing
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
 fun BaseHorizontalTabRow(
@@ -85,11 +86,18 @@ fun BaseHorizontalTabRow(
                             modifier = Modifier
                                 .background(tabColor),
                             text = {
-                                Text(
-                                    text = title,
-                                    style = MaterialTheme.typography.h4,
-                                    textAlign = TextAlign.Center,
-                                )
+                                Column {
+                                    Text(text = title)
+                                    AnimatedContent(targetState = 0,
+                                        transitionSpec = {
+                                            slideIntoContainer(towards = AnimatedContentScope.SlideDirection.Up).with(
+                                                slideOutOfContainer(towards = AnimatedContentScope.SlideDirection.Down)
+                                            )
+                                        }
+                                    ) { count ->
+                                        Text(text = "($count)")
+                                    }
+                                }
                             },
                             selected = pagerState.currentPage == index,
                             onClick = {

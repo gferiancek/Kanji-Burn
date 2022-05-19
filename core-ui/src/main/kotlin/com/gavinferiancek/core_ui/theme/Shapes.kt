@@ -1,4 +1,4 @@
-package com.gavinferiancek.theme
+package com.gavinferiancek.core_ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

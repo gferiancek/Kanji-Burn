@@ -1,4 +1,4 @@
-package com.gavinferiancek.theme
+package com.gavinferiancek.core_ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

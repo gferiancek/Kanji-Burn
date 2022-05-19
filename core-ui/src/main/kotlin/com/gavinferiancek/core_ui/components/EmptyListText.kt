@@ -1,4 +1,4 @@
-package com.gavinferiancek.ui_reviewList.components
+package com.gavinferiancek.core_ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

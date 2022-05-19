@@ -1,4 +1,4 @@
-package com.gavinferiancek.theme
+package com.gavinferiancek.core_ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
@@ -16,9 +16,17 @@ val lightGray = Color(0xFFF2F2F2)
 // MaterialTheme.colors instead of providing our own CompositionLocal
 val Colors.radical: Color
     get() = Color(0xFF00A1FA)
+val Colors.radicalLight: Color
+    get() = Color(0xFF75C5ED)
 val Colors.kanji: Color
     get() = Color(0xFFF100A1)
+val Colors.kanjiLight: Color
+    get() = Color(0xFFED75C5)
 val Colors.vocab: Color
     get() = Color(0xFFA100F1)
+val Colors.vocabLight: Color
+    get() = Color(0xFFC575ED)
 val Colors.accept: Color
     get() = Color(0xFF009a34)
+val Colors.hintBox: Color
+    get() = Color(0xFF222222)

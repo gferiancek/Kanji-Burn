@@ -1,4 +1,4 @@
-package com.gavinferiancek.review_interactors
+package com.gavinferiancek.review_interactors.list
 
 import com.gavinferiancek.core_domain.state.DataState
 import com.gavinferiancek.core_domain.state.ProgressBarState
@@ -14,11 +14,8 @@ class GetSubjectsFromCache(
 ) {
     fun execute(): Flow<DataState<List<List<Subject>>>> = flow {
         try {
-            emit(DataState.Loading(progressBarState = ProgressBarState.Loading))
-
             val instancedSubjects = mutableListOf<List<Subject>>()
 
-            withContext(Dispatchers.IO) {
                 val cachedSubjects = cache.getAllSubjects()
                 // SubjectListScreen uses a ViewPager to show separate list for each type of subject.
                 // We return a list of lists so that we can sync that to the TabRow. (1st tab = first list, etc)
@@ -29,8 +26,6 @@ class GetSubjectsFromCache(
                         cachedSubjects.filterIsInstance<Subject.Vocab>(),
                     )
                 )
-            }
-
             emit(DataState.Data(data = instancedSubjects))
 
         } catch (e: Exception) {

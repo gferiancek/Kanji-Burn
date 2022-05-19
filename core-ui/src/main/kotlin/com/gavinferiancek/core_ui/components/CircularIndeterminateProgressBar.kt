@@ -1,4 +1,4 @@
-package com.gavinferiancek.components
+package com.gavinferiancek.core_ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package com.gavinferiancek.components
+package com.gavinferiancek.core_ui.components
 
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text

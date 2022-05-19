@@ -1,8 +1,10 @@
-package com.gavinferiancek.components
+package com.gavinferiancek.core_ui.components
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,10 +24,16 @@ fun BaseScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(it)
                 .background(MaterialTheme.colors.background)
         ) {
-            if (progressBarState is ProgressBarState.Loading) CircularIndeterminateProgressBar()
-            else content()
+
+            Crossfade(targetState = progressBarState == ProgressBarState.Idle ) { idle ->
+                when {
+                    idle -> content()
+                    else -> CircularIndeterminateProgressBar()
+                }
+            }
         }
     }
 }

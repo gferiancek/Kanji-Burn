@@ -1,4 +1,4 @@
-package com.gavinferiancek.review_interactors
+package com.gavinferiancek.review_interactors.list
 
 import com.gavinferiancek.core_domain.state.FilterOrderState
 import com.gavinferiancek.core_domain.subject.Subject
