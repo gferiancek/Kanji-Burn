@@ -10,17 +10,5 @@ data class Assignment(
     val resurrectedAt: String?,
     val hidden: Boolean,
 ) {
-    fun getSrsStageName() = when(srsStage) {
-        0 -> ""
-        1 -> "Apprentice I"
-        2 -> "Apprentice II"
-        3 -> "Apprentice III"
-        4 -> "Apprentice IV"
-        5 -> "Guru I"
-        6 -> "Guru II"
-        7 -> "Master"
-        8 -> "Enlightened"
-        9 -> "Burned"
-        else -> "Unknown"
-    }
+
 }

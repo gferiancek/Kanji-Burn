@@ -3,6 +3,11 @@ package com.gavinferiancek.core_network.subjects_endpoint.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * TODO
+ * We need to track if the subject was hidden or if the field is null.  If the field is NOT null,
+ * then we do NOT want to save it!
+ */
 @Serializable
 data class RadicalDto(
     @SerialName("level")

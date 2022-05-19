@@ -9,7 +9,8 @@ CREATE TABLE assignmentEntity (
     burnedAt TEXT,
     availableAt TEXT,
     resurrectedAt TEXT,
-    hidden INTEGER NOT NULL
+    hidden INTEGER NOT NULL,
+    FOREIGN KEY (subjectId) REFERENCES subjectEntity (id)
 );
 
 getAllAssignments:

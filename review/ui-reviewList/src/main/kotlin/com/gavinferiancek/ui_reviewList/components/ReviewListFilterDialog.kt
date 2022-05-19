@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.gavinferiancek.core_domain.state.FilterOrderState
 import com.gavinferiancek.review_domain.SubjectFilter
-import com.gavinferiancek.theme.accept
-import com.gavinferiancek.theme.spacing
+import com.gavinferiancek.core_ui.theme.accept
+import com.gavinferiancek.core_ui.theme.spacing
 
 @Composable
 fun SubjectListFilterDialog(

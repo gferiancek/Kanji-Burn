@@ -1,27 +1,35 @@
 package com.gavinferiancek.review_data.cache
 
-import com.gavinferiancek.corecache.cache.SubjectEntityQueries
 import com.gavinferiancek.core_cache.model.toSubjectList
 import com.gavinferiancek.core_domain.assignment.Assignment
 import com.gavinferiancek.core_domain.reviewstatistics.ReviewStatistics
 import com.gavinferiancek.core_domain.subject.Subject
 import com.gavinferiancek.corecache.cache.ReviewSubjectEntity
+import com.gavinferiancek.corecache.cache.SubjectEntityQueries
 import com.gavinferiancek.review_domain.model.ReviewSubject
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class SubjectCacheImpl(
     private val queries: SubjectEntityQueries,
 ) : SubjectCache {
 
     override suspend fun getAllSubjects(): List<Subject> {
-        return queries.getAllSubjects().executeAsList().toSubjectList()
+        var subjects: List<Subject>
+        withContext(Dispatchers.IO) {
+            subjects = queries.getAllListSubjects().executeAsList().toSubjectList()
+        }
+        return subjects
     }
 
     override suspend fun getReviewSubjectById(id: Long): ReviewSubject {
         return queries.getReviewSubjectById(id).executeAsOne().toReviewSubject()
     }
-}
 
+    override suspend fun getSubjectsById(ids: List<Long>): List<Subject> {
+        return queries.getListSubjectsById(ids).executeAsList().toSubjectList()
+    }
+}
 
 fun ReviewSubjectEntity.toReviewSubject(): ReviewSubject {
     return when (type) {
@@ -37,7 +45,7 @@ fun ReviewSubjectEntity.toReviewSubject(): ReviewSubject {
                     lessonPosition = lessonPosition.toInt(),
                     srsSystem = srsSystem.toInt(),
                     amalgamationSubjectIds = amalgamationSubjectIds,
-                    characterImage = characterImage
+                    unlocked = unlockedAt != null,
                 ),
                 reviewStatistics = ReviewStatistics(
                     meaningCorrect = meaningCorrect?.toInt() ?: 0,
@@ -60,7 +68,7 @@ fun ReviewSubjectEntity.toReviewSubject(): ReviewSubject {
                     availableAt = availableAt,
                     resurrectedAt = resurrectedAt,
                     hidden = hidden == 1L,
-                )
+                ),
             )
         }
         "kanji" -> {
@@ -77,6 +85,7 @@ fun ReviewSubjectEntity.toReviewSubject(): ReviewSubject {
                     readings = readings,
                     amalgamationSubjectIds = amalgamationSubjectIds,
                     componentSubjectIds = componentSubjectIds,
+                    unlocked = unlockedAt != null,
                     visuallySimilarSubjectIds = visuallySimilarSubjectIds,
                     meaningHint = meaningHint,
                     readingMnemonic = readingMnemonic,
@@ -119,6 +128,7 @@ fun ReviewSubjectEntity.toReviewSubject(): ReviewSubject {
                     srsSystem = srsSystem.toInt(),
                     readings = readings,
                     componentSubjectIds = componentSubjectIds,
+                    unlocked = unlockedAt != null,
                     readingMnemonic = readingMnemonic,
                     partsOfSpeech = partsOfSpeech,
                     contextSentences = contextSentences,

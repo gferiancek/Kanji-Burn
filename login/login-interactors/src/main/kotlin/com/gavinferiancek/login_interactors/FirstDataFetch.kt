@@ -4,9 +4,11 @@ import com.gavinferiancek.core_domain.UIComponent
 import com.gavinferiancek.core_domain.state.DataState
 import com.gavinferiancek.core_domain.state.ProgressBarState
 import com.gavinferiancek.login_datasource.repository.LoginRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 
 class FirstDataFetch(
     val repository: LoginRepository,
@@ -18,12 +20,16 @@ class FirstDataFetch(
             withContext(Dispatchers.IO) {
                 val cachedSubjects = repository.getAllSubjectsFromCache()
                 if (cachedSubjects.count() == 0) {
-                    val subjects = repository.fetchAllSubjects()
-                    repository.insertAllSubjects(subjects)
+                    val subjectsTask = async {
+                        repository.insertAllSubjects(repository.fetchAllSubjects())
+                    }
                     val reviewStatistics = repository.fetchAllReviewStatistics()
                     val assignments = repository.fetchAllAssignments()
+                    val studyMaterials = repository.fetchAllStudyMaterials()
+                    subjectsTask.await()
                     repository.insertAllReviewStatistics(reviewStatistics)
                     repository.insertAllAssignments(assignments)
+                    repository.insertAllStudyMaterials(studyMaterials)
                 }
             }
             emit(DataState.Data(data = "Completed"))

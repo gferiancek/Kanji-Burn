@@ -20,6 +20,6 @@ data class CharacterImagesMetadataDto(
 )
 
 fun List<CharacterImagesDto>.toCharacterImageString(): String {
-    val matchingImage = this.find { it.metadata.styleName == "256px" }
+    val matchingImage = this.find { it.metadata.styleName == "128px" }
     return matchingImage?.url ?: ""
 }

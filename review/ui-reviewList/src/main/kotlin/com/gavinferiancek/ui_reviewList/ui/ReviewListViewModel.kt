@@ -1,16 +1,19 @@
 package com.gavinferiancek.ui_reviewList.ui
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gavinferiancek.core_domain.state.DataState
 import com.gavinferiancek.core_domain.UIComponent
+import com.gavinferiancek.core_domain.subject.Subject
 import com.gavinferiancek.review_interactors.list.FilterSubjects
 import com.gavinferiancek.review_interactors.list.GetInnerSubjectListCounts
 import com.gavinferiancek.review_interactors.list.GetSubjectsFromCache
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -30,6 +33,7 @@ constructor(
     private var filterJob: Job? = null
 
     init {
+        Log.d("ReviewListEvents", "Calling GetSubjects()")
         onTriggerEvent(ReviewListEvents.GetSubjects(""))
     }
 
@@ -55,9 +59,9 @@ constructor(
     }
 
     /**
-     * Immediate filtering when typing a query looks kind of jarring.  We add a small debounce so that
-     * the filterSubjects() use case will be called AFTER they finish typing, instead of after every
-     * key press.
+     * Immediate filtering when typing a query looks kind of jarring.  We add a small delay so that
+     * the filterSubjects() use case will be called AFTER they finish typing, instead of immediately
+     * after every key press.
      */
     private fun debounce(action: () -> Unit) {
         filterJob?.cancel()

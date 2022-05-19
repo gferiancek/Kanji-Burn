@@ -19,11 +19,7 @@ sealed class ReviewListEvents {
         val uiComponentState: UIComponentState,
     ): ReviewListEvents()
 
-    data class UpdateReviewFilter(
+    data class UpdateSubjectFilter(
         val subjectFilter: SubjectFilter,
-    ): ReviewListEvents()
-
-    data class UpdateTabData(
-        val tabData: List<String>
     ): ReviewListEvents()
 }

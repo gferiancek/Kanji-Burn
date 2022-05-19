@@ -20,7 +20,6 @@ CREATE TABLE  subjectEntity(
     meaningHint TEXT NOT NULL,
     readingMnemonic TEXT NOT NULL,
     readingHint TEXT NOT NULL,
-    characterImage TEXT NOT NULL,
     amalgamationSubjectIds TEXT AS List<Int> NOT NULL,
     componentSubjectIds TEXT AS List<Int> NOT NULL,
     visuallySimilarSubjectIds TEXT AS List<Int> NOT NULL,
@@ -38,9 +37,28 @@ INSERT OR REPLACE
 INTO subjectEntity
 VALUES ?;
 
+getSubjectsById:
+SELECT *
+FROM subjectEntity
+WHERE id IN :ids;
+
 deleteSubjectFromId:
 DELETE FROM subjectEntity
 WHERE id = :id;
+
+CREATE VIEW listSubjectEntity AS
+SELECT *
+FROM subjectEntity
+LEFT JOIN assignmentEntity ON subjectEntity.id = assignmentEntity.subjectId;
+
+getAllListSubjects:
+SELECT *
+FROM listSubjectEntity;
+
+getListSubjectsById:
+SELECT *
+FROM listSubjectEntity
+WHERE id IN :ids;
 
 CREATE VIEW reviewSubjectEntity AS
 SELECT *

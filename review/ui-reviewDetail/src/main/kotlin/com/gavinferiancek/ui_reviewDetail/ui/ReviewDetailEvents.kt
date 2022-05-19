@@ -1,9 +1,18 @@
 package com.gavinferiancek.ui_reviewDetail.ui
 
-sealed class ReviewDetailEvents {
+import com.gavinferiancek.core_domain.studymaterials.StudyMaterials
+import com.gavinferiancek.core_domain.subject.Subject
 
-    data class GetReviewById(
+sealed class ReviewDetailEvents {
+    data class GetReviewSubject(
         val id: Int,
-        val apiKey: String,
+    ): ReviewDetailEvents()
+
+    data class GetConnections(
+        val subject: Subject
+    ): ReviewDetailEvents()
+
+    data class UpdateStudyMaterials(
+        val studyMaterials: StudyMaterials,
     ): ReviewDetailEvents()
 }

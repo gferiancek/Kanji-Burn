@@ -8,13 +8,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
-import com.gavinferiancek.components.BaseScreen
+import com.gavinferiancek.core_ui.components.BaseScreen
+import com.gavinferiancek.core_ui.components.subject.SubjectList
 import com.gavinferiancek.core_domain.state.UIComponentState
 import com.gavinferiancek.ui_reviewList.components.ReviewListTabRow
 import com.gavinferiancek.ui_reviewList.components.SubjectListFilterDialog
-import com.gavinferiancek.ui_reviewList.components.SubjectListHorizontalPager
 import com.gavinferiancek.ui_reviewList.components.SubjectListToolBar
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 
 @ExperimentalAnimationApi
@@ -63,13 +64,16 @@ fun ReviewListScreen(
             hasEnteredQuery = state.query.isNotBlank(),
             scope = rememberCoroutineScope(),
         ) {
-
-            SubjectListHorizontalPager(
-                state = state,
-                pagerState = pagerState,
-                imageLoader = imageLoader,
-                navigateToDetailScreen = navigateToDetailScreen,
-            )
+            HorizontalPager(
+                count = state.tabData.size,
+                state = pagerState,
+            ) { page ->
+                SubjectList(
+                    subjects = state.filteredSubjects[page],
+                    imageLoader = imageLoader,
+                    navigateToDetailScreen = navigateToDetailScreen
+                )
+            }
         }
 
         if (state.filterDialogState is UIComponentState.Visible) {

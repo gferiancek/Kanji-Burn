@@ -10,16 +10,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.core_domain.subject.Subject
-import com.gavinferiancek.review_domain.model.ReviewSubject
-import com.gavinferiancek.theme.spacing
-import com.gavinferiancek.ui_reviewDetail.R
+import com.gavinferiancek.core_ui.SrsStageData
+import com.gavinferiancek.core_ui.theme.spacing
 
+@ExperimentalCoilApi
 @Composable
-fun SubjectDetailToolbar(
-    reviewSubject: ReviewSubject,
-    srsStageName: String,
-    srsResourceId: Int,
+fun ReviewDetailToolbar(
+    subject: Subject,
+    srsStageData: SrsStageData,
     color: Color,
     onNavigateUp: () -> Unit,
 ) {
@@ -27,38 +27,32 @@ fun SubjectDetailToolbar(
         title = {
             Row(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxWidth()
+                    .padding(
+                        end = MaterialTheme.spacing.small,
+                    ),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row {
-                    Text(
-                        modifier = Modifier
-                            .padding(
-                                top = MaterialTheme.spacing.extraSmall,
-                                bottom = MaterialTheme.spacing.extraSmall,
-                                start = MaterialTheme.spacing.small,
-                                end = MaterialTheme.spacing.small,
-                            ),
-                        text = "Level ${reviewSubject.subject.level}",
-                        color = MaterialTheme.colors.onPrimary,
-                        style = MaterialTheme.typography.h4,
-                    )
-                }
+                Text(
+                    text = "Level ${subject.level}",
+                    style = MaterialTheme.typography.h4,
+                    color = MaterialTheme.colors.onPrimary,
+                )
                 Row {
                     Text(
                         modifier = Modifier
                             .padding(end = MaterialTheme.spacing.small)
                             .align(Alignment.CenterVertically),
-                        text = srsStageName,
+                        text = srsStageData.uiValue,
                         color = MaterialTheme.colors.onPrimary,
                         style = MaterialTheme.typography.h4,
                     )
-                    if (srsResourceId != 0) {
+                    if (srsStageData.imageResource != -1) {
                         Image(
                             modifier = Modifier
                                 .fillMaxHeight(0.75f),
-                            painter = painterResource(id = srsResourceId),
+                            painter = painterResource(id = srsStageData.imageResource),
                             contentDescription = "Icon representing the current SRS Stage",
                         )
                     }

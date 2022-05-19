@@ -11,4 +11,16 @@ data class ReviewStatistics(
     val readingCurrentStreak: Int,
     val percentageCorrect: Int,
     val hidden: Boolean,
-)
+) {
+    fun getTotalCorrectPercentage() = (getTotalAttempts()).toFloat() / (meaningCorrect + readingCorrect).toFloat()
+
+    fun getMeaningCorrectPercentage() = (meaningCorrect.toFloat() + meaningIncorrect.toFloat()) / meaningCorrect.toFloat()
+
+    fun getReadingCorrectPercentage() = (readingCorrect.toFloat() + readingIncorrect.toFloat()) / readingCorrect.toFloat()
+
+    fun getTotalAttempts() = meaningCorrect + meaningIncorrect + readingCorrect + readingIncorrect
+
+    fun getMeaningAttempts() = meaningCorrect + meaningIncorrect
+
+    fun getReadingAttempts() = readingCorrect + readingIncorrect
+}

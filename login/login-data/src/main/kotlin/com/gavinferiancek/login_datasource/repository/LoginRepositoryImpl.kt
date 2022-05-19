@@ -2,26 +2,29 @@ package com.gavinferiancek.login_datasource.repository
 
 import com.gavinferiancek.core_cache.cache.KanjiBurnDatabase
 import com.gavinferiancek.core_cache.model.toSubjectList
-import com.gavinferiancek.core_domain.reviewstatistics.ReviewStatistics
 import com.gavinferiancek.core_domain.subject.Subject
 import com.gavinferiancek.core_network.EndPoints
 import com.gavinferiancek.core_network.assignments_endpoint.AssignmentsService
 import com.gavinferiancek.core_network.assignments_endpoint.model.toAssignmentEntityList
 import com.gavinferiancek.core_network.reviewstatistics_endpoint.ReviewStatisticsService
 import com.gavinferiancek.core_network.reviewstatistics_endpoint.model.toReviewStatisticsEntityList
+import com.gavinferiancek.core_network.studymaterials_endpoint.StudyMaterialsService
+import com.gavinferiancek.core_network.studymaterials_endpoint.model.toStudyMaterialsEntityList
 import com.gavinferiancek.core_network.subjects_endpoint.SubjectsService
 import com.gavinferiancek.core_network.subjects_endpoint.model.toSubjectEntityList
 import com.gavinferiancek.corecache.cache.AssignmentEntity
 import com.gavinferiancek.corecache.cache.ReviewStatisticsEntity
+import com.gavinferiancek.corecache.cache.StudyMaterialsEntity
 import com.gavinferiancek.corecache.cache.SubjectEntity
-import com.gavinferiancek.corecache.cache.SubjectEntityQueries
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LoginRepositoryImpl(
     private val database: KanjiBurnDatabase,
     private val subjectsService: SubjectsService,
     private val reviewStatisticsService: ReviewStatisticsService,
     private val assignmentsService: AssignmentsService,
+    private val studyMaterialsService: StudyMaterialsService,
 ) : LoginRepository {
 
     private val apiKey = "1b74da00-b68f-4a4a-8e96-b6638d706013"
@@ -43,7 +46,7 @@ class LoginRepositoryImpl(
     }
 
     override suspend fun getAllSubjectsFromCache(): List<Subject> {
-        return database.subjectEntityQueries.getAllSubjects().executeAsList().toSubjectList()
+        return database.subjectEntityQueries.getAllListSubjects().executeAsList().toSubjectList()
     }
 
     override suspend fun fetchAllReviewStatistics(): List<ReviewStatisticsEntity> {
@@ -62,10 +65,6 @@ class LoginRepositoryImpl(
         return reviewStatisticsEntities
     }
 
-    override suspend fun getAllReviewStatisticsFromCache(): List<ReviewStatisticsEntity> {
-        return database.reviewStatisticsEntityQueries.getAllReviewStatistics().executeAsList()
-    }
-
     override suspend fun fetchAllAssignments(): List<AssignmentEntity> {
         val assignmentEntities: MutableList<AssignmentEntity> = mutableListOf()
         withContext(Dispatchers.IO) {
@@ -82,8 +81,20 @@ class LoginRepositoryImpl(
         return assignmentEntities
     }
 
-    override suspend fun getAllAssignmentsFromCache(): List<AssignmentEntity> {
-        return database.assignmentEntityQueries.getAllAssignments().executeAsList()
+    override suspend fun fetchAllStudyMaterials(): List<StudyMaterialsEntity> {
+        val studyMaterialsEntities: MutableList<StudyMaterialsEntity> = mutableListOf()
+        withContext(Dispatchers.IO) {
+            var nextUrl: String? = EndPoints.STUDY_MATERIALS
+            while (nextUrl != null) {
+                val response = studyMaterialsService.getStudyMaterials(
+                    apiKey = apiKey,
+                    url = nextUrl,
+                )
+                nextUrl = response.pageData.nextUrl
+                studyMaterialsEntities.addAll(response.data.toStudyMaterialsEntityList())
+            }
+        }
+        return studyMaterialsEntities
     }
 
     /**
@@ -108,11 +119,11 @@ class LoginRepositoryImpl(
     }
 
     override suspend fun insertAllReviewStatistics(reviewStatisticsEntities: List<ReviewStatisticsEntity>) {
-            database.transaction {
-                reviewStatisticsEntities.forEach { reviewStatisticsEntity ->
-                    insertReviewStatistic(reviewStatisticsEntity)
-                }
+        database.transaction {
+            reviewStatisticsEntities.forEach { reviewStatisticsEntity ->
+                insertReviewStatistic(reviewStatisticsEntity)
             }
+        }
     }
 
     override fun insertAssignment(assignmentEntity: AssignmentEntity) {
@@ -123,6 +134,18 @@ class LoginRepositoryImpl(
         database.transaction {
             assignmentEntities.forEach { assignmentEntity ->
                 insertAssignment(assignmentEntity)
+            }
+        }
+    }
+
+    override fun insertStudyMaterials(studyMaterialsEntity: StudyMaterialsEntity) {
+        database.studyMaterialsEntityQueries.insertStudyMaterials(studyMaterialsEntity)
+    }
+
+    override suspend fun insertAllStudyMaterials(studyMaterialsEntities: List<StudyMaterialsEntity>) {
+        database.transaction {
+            studyMaterialsEntities.forEach { studyMaterialsEntity ->
+                insertStudyMaterials(studyMaterialsEntity)
             }
         }
     }

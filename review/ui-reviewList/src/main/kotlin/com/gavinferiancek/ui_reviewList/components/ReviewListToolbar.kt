@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import com.gavinferiancek.theme.spacing
+import com.gavinferiancek.core_ui.theme.spacing
 
 @ExperimentalComposeUiApi
 @Composable

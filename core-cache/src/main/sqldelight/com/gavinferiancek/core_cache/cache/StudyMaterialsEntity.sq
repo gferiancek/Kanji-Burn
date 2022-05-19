@@ -1,0 +1,13 @@
+CREATE TABLE studyMaterialsEntity(
+    subjectId INTEGER NOT NULL PRIMARY KEY,
+    subjectType TEXT NOT NULL,
+    meaningNote TEXT,
+    readingNote TEXT,
+    meaningSynonyms TEXT NOT NULL,
+    FOREIGN KEY (subjectId) REFERENCES subjectEntity (id)
+);
+
+insertStudyMaterials:
+INSERT OR REPLACE
+INTO studyMaterialsEntity
+VALUES ?;

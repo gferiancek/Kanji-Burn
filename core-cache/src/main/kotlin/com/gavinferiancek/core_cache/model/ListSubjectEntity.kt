@@ -2,8 +2,9 @@ package com.gavinferiancek.core_cache.model
 
 import com.gavinferiancek.corecache.cache.SubjectEntity
 import com.gavinferiancek.core_domain.subject.Subject
+import com.gavinferiancek.corecache.cache.ListSubjectEntity
 
-fun SubjectEntity.toSubject(): Subject {
+fun ListSubjectEntity.toSubject(): Subject {
     return when(type) {
         "radical" -> {
             Subject.Radical(
@@ -16,7 +17,7 @@ fun SubjectEntity.toSubject(): Subject {
                 lessonPosition = lessonPosition.toInt(),
                 srsSystem = srsSystem.toInt(),
                 amalgamationSubjectIds = amalgamationSubjectIds,
-                characterImage = characterImage
+                unlocked = unlockedAt != null,
             )
         }
         "kanji" -> {
@@ -32,6 +33,7 @@ fun SubjectEntity.toSubject(): Subject {
                 readings = readings,
                 amalgamationSubjectIds = amalgamationSubjectIds,
                 componentSubjectIds = componentSubjectIds,
+                unlocked = unlockedAt != null,
                 visuallySimilarSubjectIds = visuallySimilarSubjectIds,
                 meaningHint = meaningHint,
                 readingMnemonic = readingMnemonic,
@@ -52,6 +54,7 @@ fun SubjectEntity.toSubject(): Subject {
                 readingMnemonic = readingMnemonic,
                 partsOfSpeech = partsOfSpeech,
                 componentSubjectIds = componentSubjectIds,
+                unlocked = unlockedAt != null,
                 contextSentences = contextSentences,
                 pronunciationAudios = pronunciationAudios,
             )
@@ -59,6 +62,6 @@ fun SubjectEntity.toSubject(): Subject {
     }
 }
 
-fun List<SubjectEntity>.toSubjectList(): List<Subject> {
+fun List<ListSubjectEntity>.toSubjectList(): List<Subject> {
     return map { it.toSubject() }
 }

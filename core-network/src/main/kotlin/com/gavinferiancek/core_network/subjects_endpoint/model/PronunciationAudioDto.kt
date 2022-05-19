@@ -19,6 +19,8 @@ data class PronunciationAudioDto(
 data class PronunciationMetaDataDto(
     @SerialName("gender")
     val gender: String,
+    @SerialName("pronunciation")
+    val pronunciation: String,
     @SerialName("voice_actor_name")
     val name: String,
     @SerialName("voice_description")
@@ -39,4 +41,9 @@ fun PronunciationMetaDataDto.toPronunciationMetaData(): PronunciationMetaData {
         description = description
     )
 }
-fun List<PronunciationAudioDto>.toPronunciationAudioList() = map { it.toPronunciationAudio() }
+fun List<PronunciationAudioDto>.toPronunciationAudioList(reading: String) : List<PronunciationAudio> {
+    val filtered = this.filter { it.metadata.pronunciation == reading && it.contentType == "audio/mpeg" }
+    return filtered.map {
+        it.toPronunciationAudio()
+    }
+}

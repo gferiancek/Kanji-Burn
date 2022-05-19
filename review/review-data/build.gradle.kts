@@ -7,4 +7,6 @@ dependencies {
     "implementation"(project(Modules.coreDomain))
     "implementation"(project(Modules.reviewDomain))
     "implementation"(project(Modules.coreNetwork))
+
+    "implementation"(KotlinX.coroutinesCore)
 }

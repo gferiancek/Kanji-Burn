@@ -19,7 +19,8 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
         }
     }
     compileOptions {
@@ -86,4 +87,6 @@ dependencies {
     kaptAndroidTest(Hilt.compiler)
     androidTestImplementation(HiltTest.hiltAndroidTesting)
     androidTestImplementation(Junit.junit4)
+
+    debugImplementation(LeakCanary.leakCanary)
 }
