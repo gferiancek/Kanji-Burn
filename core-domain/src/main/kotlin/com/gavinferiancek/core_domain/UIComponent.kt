@@ -8,7 +8,7 @@ sealed class UIComponent {
     ): UIComponent()
 
     data class SnackBar(
-        val message: String,
+        val messageResId : Int,
         val action: String,
     ): UIComponent()
 

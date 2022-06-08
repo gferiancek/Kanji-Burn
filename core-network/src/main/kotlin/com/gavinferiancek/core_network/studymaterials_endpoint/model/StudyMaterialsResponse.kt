@@ -12,5 +12,4 @@ data class StudyMaterialsResponse(
     val lastUpdated: String,
     @SerialName("data")
     val data: List<StudyMaterialsDtoWrapper>,
-
 )

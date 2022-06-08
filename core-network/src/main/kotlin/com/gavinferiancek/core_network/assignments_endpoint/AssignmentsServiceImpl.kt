@@ -10,9 +10,9 @@ import io.ktor.http.*
 class AssignmentsServiceImpl(
     private val httpClient: HttpClient,
 ): AssignmentsService {
+    private val apiKey = EndPoints.apiKey
 
     override suspend fun getAssignments(
-        apiKey: String,
         url: String,
     ): AssignmentsResponse {
         return httpClient.get {
@@ -26,7 +26,6 @@ class AssignmentsServiceImpl(
     }
 
     override suspend fun getAssignmentById(
-        apiKey: String,
         id: Int
     ): AssignmentDtoWrapper {
         return httpClient.get {

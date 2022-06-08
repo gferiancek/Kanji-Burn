@@ -18,12 +18,10 @@ import kotlinx.serialization.json.Json
 interface AssignmentsService {
 
     suspend fun getAssignments(
-        apiKey: String,
         url: String,
     ): AssignmentsResponse
 
     suspend fun getAssignmentById(
-        apiKey: String,
         id: Int,
     ): AssignmentDtoWrapper
 

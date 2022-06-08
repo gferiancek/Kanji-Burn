@@ -1,6 +1,7 @@
 package com.gavinferiancek.core_domain.reviewstatistics
 
 data class ReviewStatistics(
+    val id:Int,
     val meaningCorrect: Int,
     val meaningIncorrect: Int,
     val meaningMaxStreak: Int,

@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ReviewStatisticsDtoWrapper(
+    @SerialName("id")
+    val reviewStatisticsId: Int,
     @SerialName("data_updated_at")
     val lastUpdated: String,
     @SerialName("data")
@@ -14,6 +16,7 @@ data class ReviewStatisticsDtoWrapper(
 
 fun ReviewStatisticsDtoWrapper.toReviewStatisticsEntity(): ReviewStatisticsEntity {
     return ReviewStatisticsEntity(
+        reviewStatisticsId = reviewStatisticsId.toLong(),
         lastUpdated = lastUpdated,
         subjectId = data.subjectId.toLong(),
         subjectType = data.subjectType,

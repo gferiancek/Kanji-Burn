@@ -27,15 +27,12 @@ class LoginRepositoryImpl(
     private val studyMaterialsService: StudyMaterialsService,
 ) : LoginRepository {
 
-    private val apiKey = "1b74da00-b68f-4a4a-8e96-b6638d706013"
-
     override suspend fun fetchAllSubjects(): List<SubjectEntity> {
         val subjectEntities: MutableList<SubjectEntity> = mutableListOf()
         withContext(Dispatchers.IO) {
             var nextUrl: String? = EndPoints.SUBJECTS
             while (nextUrl != null) {
                 val response = subjectsService.getSubjects(
-                    apiKey = apiKey,
                     url = nextUrl
                 )
                 nextUrl = response.pageData.nextUrl
@@ -45,17 +42,12 @@ class LoginRepositoryImpl(
         return subjectEntities
     }
 
-    override suspend fun getAllSubjectsFromCache(): List<Subject> {
-        return database.subjectEntityQueries.getAllListSubjects().executeAsList().toSubjectList()
-    }
-
     override suspend fun fetchAllReviewStatistics(): List<ReviewStatisticsEntity> {
         val reviewStatisticsEntities: MutableList<ReviewStatisticsEntity> = mutableListOf()
         withContext(Dispatchers.IO) {
             var nextUrl: String? = EndPoints.REVIEW_STATISTICS
             while (nextUrl != null) {
                 val response = reviewStatisticsService.getReviewStatistics(
-                    apiKey = apiKey,
                     url = nextUrl
                 )
                 nextUrl = response.pageData.nextUrl
@@ -71,7 +63,6 @@ class LoginRepositoryImpl(
             var nextUrl: String? = EndPoints.ASSIGNMENTS
             while (nextUrl != null) {
                 val response = assignmentsService.getAssignments(
-                    apiKey = apiKey,
                     url = nextUrl
                 )
                 nextUrl = response.pageData.nextUrl
@@ -87,7 +78,6 @@ class LoginRepositoryImpl(
             var nextUrl: String? = EndPoints.STUDY_MATERIALS
             while (nextUrl != null) {
                 val response = studyMaterialsService.getStudyMaterials(
-                    apiKey = apiKey,
                     url = nextUrl,
                 )
                 nextUrl = response.pageData.nextUrl
@@ -95,6 +85,10 @@ class LoginRepositoryImpl(
             }
         }
         return studyMaterialsEntities
+    }
+
+    override suspend fun getAllSubjectsFromCache(): List<Subject> {
+        return database.subjectEntityQueries.getAllBaseSubjects().executeAsList().toSubjectList()
     }
 
     /**

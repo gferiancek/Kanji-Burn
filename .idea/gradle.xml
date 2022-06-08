@@ -20,17 +20,16 @@
             <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/login" />
             <option value="$PROJECT_DIR$/login/login-data" />
-            <option value="$PROJECT_DIR$/login/login-interactors" />
+            <option value="$PROJECT_DIR$/login/login-useCases" />
             <option value="$PROJECT_DIR$/login/ui-login" />
             <option value="$PROJECT_DIR$/review" />
             <option value="$PROJECT_DIR$/review/review-data" />
             <option value="$PROJECT_DIR$/review/review-domain" />
-            <option value="$PROJECT_DIR$/review/review-interactors" />
+            <option value="$PROJECT_DIR$/review/review-useCases" />
             <option value="$PROJECT_DIR$/review/ui-reviewDetail" />
             <option value="$PROJECT_DIR$/review/ui-reviewList" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

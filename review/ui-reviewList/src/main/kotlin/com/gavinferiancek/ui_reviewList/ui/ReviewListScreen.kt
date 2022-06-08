@@ -2,6 +2,8 @@ package com.gavinferiancek.ui_reviewList.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -11,6 +13,7 @@ import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.core_ui.components.BaseScreen
 import com.gavinferiancek.core_ui.components.subject.SubjectList
 import com.gavinferiancek.core_domain.state.UIComponentState
+import com.gavinferiancek.core_ui.components.GenericDialog
 import com.gavinferiancek.ui_reviewList.components.ReviewListTabRow
 import com.gavinferiancek.ui_reviewList.components.SubjectListFilterDialog
 import com.gavinferiancek.ui_reviewList.components.SubjectListToolBar
@@ -18,6 +21,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @ExperimentalCoilApi

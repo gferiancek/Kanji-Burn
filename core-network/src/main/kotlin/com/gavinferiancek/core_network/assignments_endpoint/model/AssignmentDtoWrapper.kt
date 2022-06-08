@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AssignmentDtoWrapper(
+    @SerialName("id")
+    val assignmentId: Int,
     @SerialName("data_updated_at")
     val lastUpdated: String,
     @SerialName("data")
@@ -14,8 +16,9 @@ data class AssignmentDtoWrapper(
 
 fun AssignmentDtoWrapper.toAssignmentEntity(): AssignmentEntity {
     return AssignmentEntity(
-        subjectId = data.subjectId.toLong(),
+        assignmentId = assignmentId.toLong(),
         lastUpdated = lastUpdated,
+        subjectId = data.subjectId.toLong(),
         subjectType = data.subjectType,
         srsStage = data.srsStage.toLong(),
         unlockedAt = data.unlockedAt,

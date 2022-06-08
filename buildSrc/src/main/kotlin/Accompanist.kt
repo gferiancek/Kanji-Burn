@@ -3,4 +3,5 @@ object Accompanist {
     const val navigationAnimation = "com.google.accompanist:accompanist-navigation-animation:$accompanistVersion"
     const val pager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
     const val pagerIndicator = "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
+    const val flowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
 }

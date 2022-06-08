@@ -7,6 +7,7 @@ import kotlin.collections.List;
 
 CREATE TABLE  subjectEntity(
     id INTEGER NOT NULL PRIMARY KEY,
+    lastUpdated TEXT NOT NULL,
     type TEXT NOT NULL,
     level INTEGER NOT NULL,
     characters TEXT NOT NULL,
@@ -46,25 +47,26 @@ deleteSubjectFromId:
 DELETE FROM subjectEntity
 WHERE id = :id;
 
-CREATE VIEW listSubjectEntity AS
+CREATE VIEW baseSubjectEntity AS
 SELECT *
 FROM subjectEntity
 LEFT JOIN assignmentEntity ON subjectEntity.id = assignmentEntity.subjectId;
 
-getAllListSubjects:
+getAllBaseSubjects:
 SELECT *
-FROM listSubjectEntity;
+FROM baseSubjectEntity;
 
-getListSubjectsById:
+getBaseSubjectsById:
 SELECT *
-FROM listSubjectEntity
+FROM baseSubjectEntity
 WHERE id IN :ids;
 
 CREATE VIEW reviewSubjectEntity AS
 SELECT *
 FROM subjectEntity
 LEFT JOIN reviewStatisticsEntity ON subjectEntity.id = reviewStatisticsEntity.subjectId
-LEFT JOIN assignmentEntity ON subjectEntity.id = assignmentEntity.subjectId;
+LEFT JOIN assignmentEntity ON subjectEntity.id = assignmentEntity.subjectId
+LEFT JOIN studyMaterialsEntity ON subjectEntity.id = studyMaterialsEntity.subjectId;
 
 getReviewSubjectById:
 SELECT *

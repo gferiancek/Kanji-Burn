@@ -18,7 +18,7 @@ data class ReadingDto(
 
 fun ReadingDto.toReading(): Reading {
     return Reading(
-        type = type,
+        type = type?: "",
         primary = primary,
         reading = reading,
         acceptedAnswer = acceptedAnswer

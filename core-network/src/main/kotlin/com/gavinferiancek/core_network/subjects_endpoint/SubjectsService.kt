@@ -11,12 +11,10 @@ import io.ktor.client.features.json.serializer.*
 interface SubjectsService {
 
     suspend fun getSubjects(
-        apiKey: String,
         url: String,
     ): SubjectResponse
 
     suspend fun getSubjectById(
-        apiKey: String,
         id: Int,
     ): SubjectDtoWrapper
 

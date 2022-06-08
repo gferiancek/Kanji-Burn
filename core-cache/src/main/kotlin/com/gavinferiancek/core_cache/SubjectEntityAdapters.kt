@@ -28,8 +28,8 @@ val idListAdapter = object : ColumnAdapter<List<Int>, String> {
     override fun encode(value: List<Int>) = TypeConverters.toJson(value)
 }
 
-val partsOfSpeechAdapter = object : ColumnAdapter<List<String>, String> {
-    override fun decode(databaseValue: String) = TypeConverters.fromPartsOfSpeechJson(databaseValue)
+val stringListAdapter = object : ColumnAdapter<List<String>, String> {
+    override fun decode(databaseValue: String) = TypeConverters.fromStringListJson(databaseValue)
 
     override fun encode(value: List<String>) = TypeConverters.toJson(value)
 }

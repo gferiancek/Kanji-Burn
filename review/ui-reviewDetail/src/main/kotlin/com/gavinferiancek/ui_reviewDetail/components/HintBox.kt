@@ -16,6 +16,12 @@ import androidx.compose.ui.res.painterResource
 import com.gavinferiancek.core_ui.theme.spacing
 import com.gavinferiancek.ui_reviewDetail.R
 
+/**
+ * Composable that draws a box to put Kanji's Meaning/Reading hints.  Helps differentiate it from
+ * other data on screen and follows the design on wanikani.com
+ *
+ * @param hint The text to be displayed inside the hint box.
+ */
 @Composable
 fun HintBox(
     hint: String,
@@ -50,19 +56,15 @@ fun HintBox(
                         ),
                     text = "Hint",
                     color = MaterialTheme.colors.onSurface,
-                    style = MaterialTheme.typography.body2
+                    style = MaterialTheme.typography.body1
                 )
             }
-            Text(
+            Column(
                 modifier = Modifier
-                    .padding(
-                        top = MaterialTheme.spacing.small,
-                        bottom = MaterialTheme.spacing.small,
-                    ),
-                text = hint,
-                style = MaterialTheme.typography.caption,
-                color = MaterialTheme.colors.onSurface,
-            )
+                    .padding(MaterialTheme.spacing.small)
+            ) {
+                AnnotatedText(sourceText = hint)
+            }
         }
     }
 }

@@ -13,9 +13,9 @@ import io.ktor.http.*
 class ReviewStatisticsServiceImpl(
     private val httpClient: HttpClient,
 ): ReviewStatisticsService {
+    val apiKey = EndPoints.apiKey
 
     override suspend fun getReviewStatistics(
-        apiKey: String,
         url: String,
     ): ReviewStatisticsResponse {
         return httpClient.get {
@@ -29,7 +29,6 @@ class ReviewStatisticsServiceImpl(
     }
 
     override suspend fun getReviewStatisticsById(
-        apiKey: String,
         id: Int
     ): ReviewStatisticsDtoWrapper {
         return httpClient.get {
@@ -39,7 +38,7 @@ class ReviewStatisticsServiceImpl(
                     value = "Bearer $apiKey",
                 )
             }
-            url(urlString = "${EndPoints.ASSIGNMENTS}/$id")
+            url(urlString = "${EndPoints.REVIEW_STATISTICS}/$id")
         }
     }
 }

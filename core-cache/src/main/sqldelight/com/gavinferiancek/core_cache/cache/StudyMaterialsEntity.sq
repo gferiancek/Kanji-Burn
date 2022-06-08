@@ -1,11 +1,20 @@
+import kotlin.collections.List;
+
 CREATE TABLE studyMaterialsEntity(
-    subjectId INTEGER NOT NULL PRIMARY KEY,
+    studyMaterialsId INTEGER NOT NULL PRIMARY KEY,
+    lastUpdated TEXT NOT NULL,
+    subjectId INTEGER NOT NULL,
     subjectType TEXT NOT NULL,
-    meaningNote TEXT,
-    readingNote TEXT,
-    meaningSynonyms TEXT NOT NULL,
+    meaningNote TEXT NOT NULL,
+    readingNote TEXT NOT NULL,
+    meaningSynonyms TEXT AS List<String> NOT NULL,
     FOREIGN KEY (subjectId) REFERENCES subjectEntity (id)
 );
+
+getStudyMaterialsById:
+SELECT  *
+FROM studyMaterialsEntity
+WHERE subjectId = :id;
 
 insertStudyMaterials:
 INSERT OR REPLACE

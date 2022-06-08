@@ -60,12 +60,12 @@ val NotoSansTypography = Typography(
     body1 = TextStyle(
         fontFamily = NotoSans,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 14.sp
     ),
     body2 = TextStyle(
         fontFamily = NotoSans,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = 12.sp
     ),
     button = TextStyle(
         fontFamily = NotoSans,
@@ -75,7 +75,7 @@ val NotoSansTypography = Typography(
     caption = TextStyle(
         fontFamily = NotoSans,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
+        fontSize = 11.sp
     ),
     overline = TextStyle(
         fontFamily = NotoSans,

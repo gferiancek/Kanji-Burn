@@ -9,6 +9,7 @@ buildscript {
         classpath(Build.hiltAndroid)
         classpath(Build.kotlinGradlePlugin)
         classpath(Build.sqlDelightGradlePlugin)
+        classpath("com.android.tools.build:gradle:7.2.0")
     }
 }
 

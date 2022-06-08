@@ -2,7 +2,7 @@ package com.gavinferiancek.ui_reviewList.di
 
 import com.gavinferiancek.review_interactors.list.FilterSubjects
 import com.gavinferiancek.review_interactors.list.GetSubjectsFromCache
-import com.gavinferiancek.review_interactors.SubjectUseCases
+import com.gavinferiancek.review_interactors.ReviewUseCases
 import com.gavinferiancek.review_interactors.list.GetInnerSubjectListCounts
 import dagger.Module
 import dagger.Provides
@@ -16,16 +16,16 @@ object ReviewListModule {
 
     @Provides
     @ViewModelScoped
-    fun provideGetSubjectsFromCache(useCases: SubjectUseCases): GetSubjectsFromCache =
+    fun provideGetSubjectsFromCache(useCases: ReviewUseCases): GetSubjectsFromCache =
         useCases.getSubjectsFromCache
 
     @Provides
     @ViewModelScoped
-    fun provideFilterSubjects(useCases: SubjectUseCases): FilterSubjects =
+    fun provideFilterSubjects(useCases: ReviewUseCases): FilterSubjects =
         useCases.filterSubjects
 
     @Provides
     @ViewModelScoped
-    fun provideGenerateTabData(useCases: SubjectUseCases): GetInnerSubjectListCounts =
+    fun provideGenerateTabData(useCases: ReviewUseCases): GetInnerSubjectListCounts =
         useCases.getInnerSubjectListCounts
 }

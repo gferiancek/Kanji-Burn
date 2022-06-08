@@ -15,6 +15,8 @@ sealed class SubjectDtoWrapper {
     data class RadicalDtoWrapper(
         @SerialName("id")
         val id: Int,
+        @SerialName("data_updated_at")
+        val lastUpdated: String,
         @SerialName("object")
         val type: String,
         @SerialName("data")
@@ -25,6 +27,8 @@ sealed class SubjectDtoWrapper {
     data class KanjiDtoWrapper(
         @SerialName("id")
         val id: Int,
+        @SerialName("data_updated_at")
+        val lastUpdated: String,
         @SerialName("object")
         val type: String,
         @SerialName("data")
@@ -35,6 +39,8 @@ sealed class SubjectDtoWrapper {
     data class VocabDtoWrapper(
         @SerialName("id")
         val id: Int,
+        @SerialName("data_updated_at")
+        val lastUpdated: String,
         @SerialName("object")
         val type: String,
         @SerialName("data")
@@ -64,6 +70,7 @@ fun SubjectDtoWrapper.toSubjectEntity(): SubjectEntity {
         is SubjectDtoWrapper.RadicalDtoWrapper -> {
             SubjectEntity(
                 id = id.toLong(),
+                lastUpdated = lastUpdated,
                 type = "radical",
                 level = data.level.toLong(),
                 characters = data.characters?: data.characterImages.toCharacterImageString(),
@@ -88,6 +95,7 @@ fun SubjectDtoWrapper.toSubjectEntity(): SubjectEntity {
         is SubjectDtoWrapper.KanjiDtoWrapper -> {
             SubjectEntity(
                 id = id.toLong(),
+                lastUpdated = lastUpdated,
                 type = "kanji",
                 level = data.level.toLong(),
                 characters = data.characters,
@@ -112,6 +120,7 @@ fun SubjectDtoWrapper.toSubjectEntity(): SubjectEntity {
         is SubjectDtoWrapper.VocabDtoWrapper -> {
             SubjectEntity(
                 id = id.toLong(),
+                lastUpdated = lastUpdated,
                 type = "vocab",
                 level = data.level.toLong(),
                 characters = data.characters,

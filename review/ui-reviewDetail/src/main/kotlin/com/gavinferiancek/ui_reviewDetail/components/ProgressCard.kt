@@ -58,7 +58,7 @@ fun ProgressCard(
                 ProgressCardItem(
                     displayStreakInfo = true,
                     percentageCorrect = reviewStatistics.getReadingCorrectPercentage(),
-                    title = "Meaning Answered Correct",
+                    title = "Reading Answered Correct",
                     totalAttempts = reviewStatistics.getReadingAttempts(),
                     currentStreak = reviewStatistics.readingCurrentStreak,
                     maxStreak = reviewStatistics.readingMaxStreak,
@@ -74,11 +74,11 @@ fun ProgressCard(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "Next Review",
-                        style = MaterialTheme.typography.caption,
+                        text = "Unlocked Date",
+                        style = MaterialTheme.typography.caption
                     )
                     Text(
-                        text = "Available Now",
+                        text = assignment.formatUnlockedAt(),
                         style = MaterialTheme.typography.overline
                     )
                 }
@@ -86,11 +86,11 @@ fun ProgressCard(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "Unlocked Date",
-                        style = MaterialTheme.typography.caption
+                        text = "Next Review",
+                        style = MaterialTheme.typography.caption,
                     )
                     Text(
-                        text = "Yesterday",
+                        text = assignment.formatAvailableAt(),
                         style = MaterialTheme.typography.overline
                     )
                 }
@@ -102,7 +102,7 @@ fun ProgressCard(
                         style = MaterialTheme.typography.caption
                     )
                     Text(
-                        text = "Tomorrow",
+                        text = assignment.formatUnlockedAt(),
                         style = MaterialTheme.typography.overline
                     )
                 }

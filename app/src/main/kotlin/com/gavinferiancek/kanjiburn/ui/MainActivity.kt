@@ -9,6 +9,7 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @ExperimentalPagerApi
@@ -41,7 +43,6 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +92,7 @@ fun NavGraphBuilder.addLoginScreen(
     }
 }
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
@@ -127,6 +129,7 @@ fun NavGraphBuilder.addReviewListScreen(
     }
 }
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @ExperimentalCoilApi
 @ExperimentalAnimationApi

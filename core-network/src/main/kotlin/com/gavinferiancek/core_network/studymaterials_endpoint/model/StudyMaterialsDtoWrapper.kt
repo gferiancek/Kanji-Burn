@@ -6,23 +6,24 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StudyMaterialsDtoWrapper(
+    @SerialName("id")
+    val studyMaterialsId: Int,
+    @SerialName("data_updated_at")
+    val lastUpdated: String,
     @SerialName("data")
     val data: StudyMaterialsDto,
 )
 
 fun StudyMaterialsDtoWrapper.toStudyMaterialsEntity(): StudyMaterialsEntity {
-    val meaningSynonymsString = when(data.meaningSynonyms.count()) {
-        0 -> ""
-        1 -> data.meaningSynonyms[0]
-        else -> data.meaningSynonyms.joinToString(", ")
-    }
 
     return StudyMaterialsEntity(
+        studyMaterialsId = studyMaterialsId.toLong(),
+        lastUpdated = lastUpdated,
         subjectId = data.subjectId.toLong(),
         subjectType = data.subjectType,
-        meaningNote = data.meaningNote,
-        readingNote = data.readingNote,
-        meaningSynonyms = meaningSynonymsString,
+        meaningNote = data.meaningNote?: "",
+        readingNote = data.readingNote?: "",
+        meaningSynonyms = data.meaningSynonyms,
     )
 }
 

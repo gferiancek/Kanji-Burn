@@ -17,13 +17,13 @@ include ':core-ui'
 
 include ':login'
 include ':login:login-data'
-include ':login:login-interactors'
+include ':login:login-useCases'
 include ':login:ui-login'
 
 include ':review'
 include ':review:review-data'
 include ':review:review-domain'
-include ':review:review-interactors'
+include ':review:review-useCases'
 include ':review:ui-reviewDetail'
 include ':review:ui-reviewList'
 

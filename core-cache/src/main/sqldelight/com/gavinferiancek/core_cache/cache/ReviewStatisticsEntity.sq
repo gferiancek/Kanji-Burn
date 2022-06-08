@@ -1,7 +1,8 @@
 
 CREATE TABLE reviewStatisticsEntity (
-    subjectId INTEGER PRIMARY KEY NOT NULL,
+    reviewStatisticsId INTEGER PRIMARY KEY NOT NULL,
     lastUpdated TEXT NOT NULL,
+    subjectId INTEGER NOT NULL,
     subjectType TEXT NOT NULL,
     meaningCorrect INTEGER NOT NULL,
     meaningIncorrect INTEGER NOT NULL,
@@ -16,9 +17,10 @@ CREATE TABLE reviewStatisticsEntity (
     FOREIGN KEY (subjectId) REFERENCES subjectEntity (id)
 );
 
-getAllReviewStatistics:
+getReviewStatisticsById:
 SELECT *
-FROM reviewStatisticsEntity;
+FROM reviewStatisticsEntity
+WHERE subjectId = :id;
 
 insertReviewStatistics:
 INSERT OR REPLACE

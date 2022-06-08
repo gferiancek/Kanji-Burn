@@ -1,8 +1,10 @@
 package com.gavinferiancek.core_ui.components.subject
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,11 +15,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
-import com.gavinferiancek.core_domain.subject.Subject
+import com.gavinferiancek.core_domain.subject.*
 import com.gavinferiancek.core_ui.theme.*
 import kotlin.math.roundToInt
 
@@ -32,15 +33,15 @@ fun SubjectListItem(
     var backgroundColor = Color.Unspecified
     var paintColor = Color.Unspecified
     when (subject) {
-        is Subject.Radical -> {
+        is Radical -> {
             backgroundColor = MaterialTheme.colors.radical
             paintColor = MaterialTheme.colors.radicalLight
         }
-        is Subject.Kanji -> {
+        is Kanji -> {
             backgroundColor = MaterialTheme.colors.kanji
             paintColor = MaterialTheme.colors.kanjiLight
         }
-        is Subject.Vocab -> {
+        is Vocab -> {
             backgroundColor = MaterialTheme.colors.vocab
             paintColor = MaterialTheme.colors.vocabLight
         }
@@ -100,15 +101,15 @@ fun SubjectListItem(
                 textAlign = TextAlign.Start,
             )
             when (subject) {
-                is Subject.Radical, is Subject.Kanji -> {
+                is Radical, is Kanji -> {
                     CharacterText(
                         characters = subject.characters,
                         imageLoader = imageLoader
                     )
-                    if (subject is Subject.Kanji) ReadingText(reading = subject.getPrimaryReading())
-                    MeaningText(meaning = subject.getPrimaryMeaning())
+                    if (subject is Kanji) ReadingText(reading = subject.readings.getPrimaryReading())
+                    MeaningText(meaning = subject.meanings.getPrimaryMeaning())
                 }
-                is Subject.Vocab -> {
+                is Vocab -> {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -127,8 +128,8 @@ fun SubjectListItem(
                         Column(
                             horizontalAlignment = Alignment.End
                         ) {
-                            ReadingText(reading = subject.getPrimaryReading())
-                            MeaningText(meaning = subject.getPrimaryMeaning())
+                            ReadingText(reading = subject.readings.getPrimaryReading())
+                            MeaningText(meaning = subject.meanings.getPrimaryMeaning())
                         }
                     }
                 }

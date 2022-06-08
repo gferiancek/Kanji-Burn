@@ -7,9 +7,10 @@ dependencies {
     "implementation"(project(Modules.coreDomain))
     "implementation"(project(Modules.coreUi))
     "implementation"(project(Modules.reviewDomain))
-    "implementation"(project(Modules.reviewInteractors))
+    "implementation"(project(Modules.reviewUseCases))
 
     "implementation"(Accompanist.pager)
+    "implementation"(Accompanist.flowLayout)
 
     "implementation"(Coil.coil)
 }

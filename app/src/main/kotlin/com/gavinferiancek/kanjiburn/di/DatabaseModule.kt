@@ -3,8 +3,7 @@ package com.gavinferiancek.kanjiburn.di
 import android.app.Application
 import com.gavinferiancek.core_cache.*
 import com.gavinferiancek.core_cache.cache.KanjiBurnDatabase
-import com.gavinferiancek.corecache.cache.SubjectEntity
-import com.gavinferiancek.corecache.cache.SubjectEntityQueries
+import com.gavinferiancek.corecache.cache.*
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
@@ -19,7 +18,6 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    // Look at just using SubjectDatabase.schema instead and using string for name.
     fun provideAndroidDriver(app: Application): SqlDriver {
         return AndroidSqliteDriver(
             schema = KanjiBurnDatabase.Schema,
@@ -40,16 +38,23 @@ object DatabaseModule {
                 amalgamationSubjectIdsAdapter = idListAdapter,
                 componentSubjectIdsAdapter = idListAdapter,
                 visuallySimilarSubjectIdsAdapter = idListAdapter,
-                partsOfSpeechAdapter = partsOfSpeechAdapter,
+                partsOfSpeechAdapter = stringListAdapter,
                 contextSentencesAdapter = contextSentencesAdapter,
                 pronunciationAudiosAdapter = pronunciationAudiosAdapter,
+            ),
+            studyMaterialsEntityAdapter = StudyMaterialsEntity.Adapter(
+                meaningSynonymsAdapter = stringListAdapter,
             )
         )
     }
 
     @Provides
     @Singleton
-    fun provideSubjectQueries(database: KanjiBurnDatabase): SubjectEntityQueries {
-        return database.subjectEntityQueries
-    }
+    fun provideSubjectQueries(database: KanjiBurnDatabase): SubjectEntityQueries =
+        database.subjectEntityQueries
+
+    @Provides
+    @Singleton
+    fun provideStudyMaterialsQueries(database: KanjiBurnDatabase): StudyMaterialsEntityQueries =
+        database.studyMaterialsEntityQueries
 }

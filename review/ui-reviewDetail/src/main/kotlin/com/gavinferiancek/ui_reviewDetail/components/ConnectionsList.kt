@@ -15,6 +15,17 @@ import com.gavinferiancek.core_domain.subject.Subject
 import com.gavinferiancek.core_ui.components.subject.SubjectListItem
 import com.gavinferiancek.core_ui.theme.spacing
 
+/**
+ * Composable that builds a GridList row by row. (Needed since ReviewDetailContent is inside of a
+ * Lazy Column). Takes connections and windows them based on numberOfColumns and draws each row one
+ * by one.
+ *
+ * @param numberOfColumns Specifies the number of columns to include in each row.
+ * @param title The text to be displayed over the Row
+ * @param connections The list of connections. (Visually Similar, Found In, etc).
+ * @param imageLoader Necessary to display images for Radicals that do not have text
+ * @param navigateToDetailScreen Navigates to the detail screen of the clicked Subject.
+ */
 @ExperimentalMaterialApi
 @ExperimentalCoilApi
 @Composable
@@ -45,10 +56,6 @@ fun ConnectionsList(
             color = MaterialTheme.colors.onSurface,
             textAlign = TextAlign.Center,
         )
-        /**
-         * ConnectionsList is used inside of a LazyColumn, so we can't use a LazyVerticalGrid here.
-         * Instead, we have to build our Grid row by row with the help of collections.windowed().
-         */
         val screenWidth = LocalConfiguration.current.screenWidthDp.dp
         connections.windowed(
             size = numberOfColumns,

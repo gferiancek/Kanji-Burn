@@ -6,7 +6,7 @@ dependencies {
     "implementation"(project(Modules.coreUi))
     "implementation"(project(Modules.coreDomain))
     "implementation"(project(Modules.reviewDomain))
-    "implementation"(project(Modules.loginInteractors))
+    "implementation"(project(Modules.loginUseCases))
 
     "implementation"(Accompanist.pager)
     "implementation"(Accompanist.pagerIndicator)

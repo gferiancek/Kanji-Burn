@@ -16,68 +16,61 @@ import com.gavinferiancek.core_ui.theme.vocab
  * Util fun that will take a string with various markup tags and remove the tags and apply correct styling
  * to the text contained between it based on tag type. All possible tag types:
  * <ja></ja> - Contains plain Japanese text
+ * <I></I> - No clear purpose (just normal text on website). Just remove tags
  * <a href></a> - Contains url info and hyperlink text
- * <radical></radical> - References Radical. Use Subject.Radical colors in annotation.
- * <kanji></kanji> - References Kanji character. Use Subject.Kanji colors in annotation.
- * <vocabulary></vocabulary> - References Vocab word. Use Subject.Vocab colors in annotation.
+ * <radical></radical> - References Radical. Use Radical colors in annotation.
+ * <kanji></kanji> - References Kanji character. Use Kanji colors in annotation.
+ * <vocabulary></vocabulary> - References Vocab word. Use Vocab colors in annotation.
  * <reading></reading> - Annotate text to show helpful pronunciation information.
  */
 @Composable
 fun generateAnnotatedString(
     sourceText: String,
 ): AnnotatedString {
-    // Example text: Hello <kanji>One</kanji> nice weather today would result in splitString =
-    // [Hello, kanji, one, /kanji, nice weather today] which leaves us with four main parts:
-    // 1) Regular text
-    // 2) Type of annotated text (we apply different styles/annotations depending on the markup tag)
-    // 3) Text we wish to annotate
-    // 4) Rest of the string.
-    // By stepping by 4 we can append the regular text (i), get type of annotation (i + 1),
-    // annotate desired text (i + 2), and continue processing the rest of the string.
+    // Example text: "Hello <kanji>One</kanji> nice weather today!" would result in splitString =
+    // [Hello, kanji, one, /kanji, nice weather today!] which leaves us with five parts:
+    // i: Regular text, no annotations required.
+    // i+1: Type of annotation to apply
+    // i+2: Text we wish to annotate
+    // i+3: Closing tag, we skip over this
+    // i+4: Rest of the string. By stepping by 4, this is i in the next pass.
     val splitString = sourceText.split("<", ">")
     val annotatedString = buildAnnotatedString {
         for (i in 0..splitString.lastIndex step 4) {
-            val baseString = splitString[i]
-            append(baseString)
-
-            // jump to end of loop to avoid stepping out of bounds
-            if (i == splitString.lastIndex) continue
-
-            val markupTag = splitString[i + 1]
-            val targetText = splitString[i + 2]
-            // REMOVE with block, confusing.  Just use it in else since we need else block anyways.
-            when {
-                markupTag.contains("a href") -> {
-                    val hyperlinkData = createHyperlink(
-                        sourceText = sourceText,
-                        markupTag = markupTag,
-                        hyperlinkText = targetText
-                    )
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color.Blue,
-                            textDecoration = TextDecoration.Underline
+            append(splitString[i])
+            if (i != splitString.lastIndex) {
+                val markupTag = splitString[i + 1]
+                val targetText = splitString[i + 2]
+                when {
+                    markupTag.contains("a href") -> {
+                        val hyperlinkData = createHyperlink(
+                            sourceText = sourceText,
+                            markupTag = markupTag,
+                            hyperlinkText = targetText
                         )
-                    ) { append(targetText) }
-                    addStringAnnotation(
-                        tag = "URL",
-                        annotation = hyperlinkData.first,
-                        start = hyperlinkData.second,
-                        end = hyperlinkData.third,
-                    )
-                }
-                markupTag == "ja" -> append(targetText)
-                else -> {
-                    AppendSpan(
-                        builder = this,
-                        markupTag = markupTag,
-                        text = targetText,
-                    )
-                    // If targetText is followed by a special character (,/./?/etc) then there will not be a space
-                    // between the colored span and the normal text. This causes the punctuation to be
-                    // difficult to read if it is a comma or period.  In those cases, we append a space.
-                    val nextChar = if (splitString[i + 4].isNotBlank()) splitString[i + 4].first() else ""
-                    if (nextChar == ',' || nextChar == '.') append("\u0020")
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color.Blue,
+                                textDecoration = TextDecoration.Underline
+                            )
+                        ) {
+                            append(targetText)
+                        }
+                        addStringAnnotation(
+                            tag = "URL",
+                            annotation = hyperlinkData.first,
+                            start = hyperlinkData.second,
+                            end = hyperlinkData.third,
+                        )
+                    }
+                    markupTag == "ja" || markupTag == "I" -> append(targetText)
+                    else -> {
+                        AppendSpan(
+                            builder = this,
+                            markupTag = markupTag,
+                            text = targetText,
+                        )
+                    }
                 }
             }
         }
@@ -150,7 +143,8 @@ private fun AppendSpan(
         words.forEach { word ->
             withStyle(paddingSpanStyle) { append("-") }
             withStyle(textSpanStyle) { append(word) }
-            if (word == words.last()) withStyle(paddingSpanStyle) { append("-") }
+            withStyle(paddingSpanStyle) { append("-") }
+            if (word != words.last()) append(" ")
         }
     }
 }

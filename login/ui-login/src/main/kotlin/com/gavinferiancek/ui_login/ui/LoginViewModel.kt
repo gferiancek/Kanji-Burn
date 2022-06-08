@@ -31,7 +31,6 @@ constructor(
 
             }
             is LoginEvents.FetchData -> {
-                Log.d("LOGIN-VIEWMODEL", "firstDataFetch() is starting")
                 firstDataFetch()
             }
         }

@@ -49,12 +49,12 @@ dependencies {
     implementation(project(Modules.coreNetwork))
 
     implementation(project(Modules.reviewData))
-    implementation(project(Modules.reviewInteractors))
+    implementation(project(Modules.reviewUseCases))
     implementation(project(Modules.ui_reviewList))
     implementation(project(Modules.ui_reviewDetail))
 
     implementation(project(Modules.loginData))
-    implementation(project(Modules.loginInteractors))
+    implementation(project(Modules.loginUseCases))
     implementation(project(Modules.ui_loginScreen))
 
     implementation(Accompanist.navigationAnimation)

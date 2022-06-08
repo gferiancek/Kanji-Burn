@@ -49,7 +49,7 @@ object TypeConverters {
         ) ?: emptyList()
     }
 
-    fun fromPartsOfSpeechJson(json: String): List<String> {
+    fun fromStringListJson(json: String): List<String> {
         return jsonParser.fromJson<List<String>>(
             json,
             object: TypeToken<List<String>>(){}.type

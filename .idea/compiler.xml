@@ -8,6 +8,8 @@
       <module name="KanjiBurn.review.ui-reviewDetail" target="11" />
       <module name="KanjiBurn.review.ui-reviewList" target="11" />
       <module name="KanjiBurn2.buildSrc" target="11" />
+      <module name="KanjiBurn2.buildSrc.main" target="11" />
+      <module name="KanjiBurn2.buildSrc.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,7 +1,7 @@
 package com.gavinferiancek.ui_login.di
 
 import com.gavinferiancek.login_interactors.FirstDataFetch
-import com.gavinferiancek.login_interactors.LoginInteractors
+import com.gavinferiancek.login_interactors.LoginUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,9 +15,9 @@ object LoginModule {
     @Provides
     @ViewModelScoped
     fun providesFirstDataFetch(
-        interactors: LoginInteractors,
+        useCases: LoginUseCases,
     ): FirstDataFetch {
-        return interactors.firstDataFetch
+        return useCases.firstDataFetch
     }
 
 }

@@ -72,7 +72,8 @@ fun ReviewDetailHeader(
                                 .padding(
                                     start = if (screenItems.count() > 5) MaterialTheme.spacing.none else MaterialTheme.spacing.small,
                                 ),
-                            contentPadding = PaddingValues(MaterialTheme.spacing.extraSmall),
+                            contentPadding = PaddingValues(
+                                if (screenItems.count() > 5) MaterialTheme.spacing.small else MaterialTheme.spacing.extraSmall),
                             onClick = {
                                 scope.launch {
                                     lazyState.animateScrollToItem(index)

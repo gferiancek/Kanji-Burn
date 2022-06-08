@@ -10,12 +10,10 @@ import io.ktor.client.features.json.serializer.*
 interface ReviewStatisticsService {
 
     suspend fun getReviewStatistics(
-        apiKey: String,
         url: String,
     ): ReviewStatisticsResponse
 
     suspend fun getReviewStatisticsById(
-        apiKey: String,
         id: Int,
     ): ReviewStatisticsDtoWrapper
 

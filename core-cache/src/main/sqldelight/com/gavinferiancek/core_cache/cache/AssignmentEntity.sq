@@ -1,6 +1,7 @@
 CREATE TABLE assignmentEntity (
-    subjectId INTEGER PRIMARY KEY NOT NULL,
+    assignmentId INTEGER PRIMARY KEY NOT NULL,
     lastUpdated TEXT NOT NULL,
+    subjectId INTEGER NOT NULL,
     subjectType TEXT NOT NULL,
     srsStage INTEGER NOT NULL,
     unlockedAt TEXT,
@@ -13,9 +14,10 @@ CREATE TABLE assignmentEntity (
     FOREIGN KEY (subjectId) REFERENCES subjectEntity (id)
 );
 
-getAllAssignments:
+getAssignmentById:
 SELECT *
-FROM assignmentEntity;
+FROM assignmentEntity
+WHERE subjectId = :id;
 
 insertAssignment:
 INSERT OR REPLACE

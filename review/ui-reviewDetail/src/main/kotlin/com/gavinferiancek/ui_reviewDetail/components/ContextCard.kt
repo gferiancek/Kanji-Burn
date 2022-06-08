@@ -17,6 +17,13 @@ import com.gavinferiancek.core_domain.subject.ContextSentence
 import com.gavinferiancek.core_ui.components.TitledCardView
 import com.gavinferiancek.core_ui.theme.spacing
 
+/**
+ * Card Composable displaying relevant Context data for Vocabulary Subjects.
+ * TODO Modifier.blur() is Android 12+; Need to find a workaround for older devices.
+ *
+ * @param title Title text above the Card
+ * @param contextSentences Contains both JP and EN context sentences for the subject.
+ */
 @Composable
 fun ContextCard(
     title: String,
@@ -43,6 +50,7 @@ fun ContextCard(
                 val isBlurred = remember { mutableStateOf(true) }
                 Text(
                     modifier = Modifier
+                        .padding(bottom = MaterialTheme.spacing.small)
                         .blur(if (isBlurred.value) 5.dp else 0.dp)
                         .clickable(
                             interactionSource = MutableInteractionSource(),

@@ -10,9 +10,9 @@ import io.ktor.http.*
 class SubjectsServiceImpl(
     private val httpClient: HttpClient,
 ): SubjectsService {
+    val apiKey = EndPoints.apiKey
 
     override suspend fun getSubjects(
-        apiKey: String,
         url: String,
     ): SubjectResponse {
         return httpClient.get {
@@ -26,7 +26,6 @@ class SubjectsServiceImpl(
     }
 
     override suspend fun getSubjectById(
-        apiKey: String,
         id: Int
     ): SubjectDtoWrapper {
         return httpClient.get {
