@@ -1,4 +1,4 @@
-package com.gavinferiancek.ui_reviewDetail.components
+package com.gavinferiancek.core_ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 import com.gavinferiancek.core_ui.theme.spacing
 
 @Composable
-fun DetailCard(
-    header: @Composable () -> Unit,
+fun KanjiBurnCard(
     body: @Composable () -> Unit,
 ) {
     Card(
@@ -29,8 +28,6 @@ fun DetailCard(
                 .fillMaxWidth()
                 .padding(MaterialTheme.spacing.medium),
         ) {
-            header()
-            Spacer(modifier = Modifier.padding(top = MaterialTheme.spacing.small))
             body()
         }
     }

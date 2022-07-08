@@ -1,6 +1,5 @@
-package com.gavinferiancek.ui_reviewDetail.components
+package com.gavinferiancek.core_ui.components.subject
 
-import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -12,23 +11,21 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.SoftwareKeyboardController
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import com.gavinferiancek.core_ui.theme.spacing
-import com.gavinferiancek.review_domain.DetailEditState
+import com.gavinferiancek.core_domain.state.StudyMaterialsEditState
 
 /**
  * Composable that shows a Note header, along with the user note for that card. (Meaning or Reading.)
@@ -42,7 +39,6 @@ import com.gavinferiancek.review_domain.DetailEditState
  * @param isEditing Value of whether or not this UserNote instance is being edited.
  * @param targetEditState The desired DetailEditState of this UserNote. Either DetailEditState.EditingMeaning or
  * DetailEditState.EditingReading. Used in updateDetailEditState to tell the ViewModel which userNote we are editing.
- * @param focusRequester focusRequester that is attached to OutlinedTextView to automatically focus when it is on screen.
  * @param updateDetailEditState Updates the DetailEditState with the targetEditState. This is used so that only one thing on
  * the detail screen can be edited at once.
  * @param updateStudyMaterials Sends the user entered data back to the ViewModel so it can send the new data to the WaniKani API.
@@ -55,13 +51,13 @@ fun UserNote(
     textFieldValue: TextFieldValue,
     color: Color,
     isEditing: Boolean,
-    targetEditState: DetailEditState,
-    focusRequester: FocusRequester,
-    keyboardController: SoftwareKeyboardController?,
-    updateDetailEditState: (DetailEditState) -> Unit,
+    targetEditState: StudyMaterialsEditState,
+    updateDetailEditState: (StudyMaterialsEditState) -> Unit,
     updateStudyMaterials: (String) -> Unit,
     updateTextFieldValue: (TextFieldValue) -> Unit,
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusRequester = remember { FocusRequester() }
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -122,7 +118,7 @@ fun UserNote(
                         IconButton(
                             onClick = {
                                 keyboardController?.hide()
-                                updateDetailEditState(DetailEditState.NotEditing)
+                                updateDetailEditState(StudyMaterialsEditState.NotEditing)
                             }
                         ) {
                             Icon(

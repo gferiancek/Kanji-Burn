@@ -1,4 +1,4 @@
-package com.gavinferiancek.core_ui.components.subject
+package com.gavinferiancek.core_ui.components.text
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -8,19 +8,19 @@ import androidx.compose.ui.text.style.TextOverflow
 
 /**
  * It seems overkill to extract out such a simple composable, but this same style is used everywhere
- * we display a subject's Reading text. Extracted out to avoid typing the same styles in multiple places,
+ * we display a subject's Meaning text. Extracted out to avoid typing the same styles in multiple places,
  * but will reconsider later on into the project whether it is actually needed.
  */
 @Composable
-fun ReadingText(
-    reading: String,
-    style: TextStyle = MaterialTheme.typography.h4,
+fun MeaningText(
+    meaning: String,
+    style: TextStyle = MaterialTheme.typography.caption,
 ) {
     Text(
-        text = reading,
+        text = meaning,
         color = MaterialTheme.colors.onPrimary,
         style = style,
         maxLines = 1,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
     )
 }

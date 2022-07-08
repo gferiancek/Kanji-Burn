@@ -9,6 +9,7 @@ dependencies {
 
     "implementation"(Accompanist.pager)
     "implementation"(Accompanist.pagerIndicator)
+    "implementation"(Accompanist.flowLayout)
 
     "implementation"(Coil.coil)
 }

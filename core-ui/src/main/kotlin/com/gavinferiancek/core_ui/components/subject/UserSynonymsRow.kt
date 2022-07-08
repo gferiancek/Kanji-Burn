@@ -1,4 +1,4 @@
-package com.gavinferiancek.ui_reviewDetail.components
+package com.gavinferiancek.core_ui.components.subject
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.Spring
@@ -24,15 +24,14 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.SoftwareKeyboardController
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.gavinferiancek.core_ui.theme.spacing
-import com.gavinferiancek.review_domain.DetailEditState
+import com.gavinferiancek.core_domain.state.StudyMaterialsEditState
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +39,7 @@ import kotlinx.coroutines.launch
 
 const val NO_SELECTION = -1
 
-@OptIn(ExperimentalComposeUiApi::class)
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
 fun UserSynonymsRow(
@@ -50,11 +49,11 @@ fun UserSynonymsRow(
     lazyState: LazyListState,
     isEditing: Boolean,
     isDeleting: Boolean,
-    focusRequester: FocusRequester,
-    keyboardController: SoftwareKeyboardController?,
     updateStudyMaterials: (String) -> Unit,
-    updateDetailEditState: (DetailEditState) -> Unit,
+    updateDetailEditState: (StudyMaterialsEditState) -> Unit,
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusRequester = remember { FocusRequester() }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -84,11 +83,11 @@ fun UserSynonymsRow(
                         when (selectedIndex.value) {
                             index -> {
                                 selectedIndex.value = NO_SELECTION
-                                updateDetailEditState(DetailEditState.NotEditing)
+                                updateDetailEditState(StudyMaterialsEditState.NotEditing)
                             }
                             else -> {
                                 selectedIndex.value = index
-                                updateDetailEditState(DetailEditState.DeletingUserSynonym)
+                                updateDetailEditState(StudyMaterialsEditState.DeletingUserSynonym)
                             }
                         }
                     }
@@ -134,7 +133,7 @@ fun UserSynonymsRow(
                     backgroundColor = MaterialTheme.colors.surface,
                     contentColor = color,
                 ),
-                onClick = { updateDetailEditState(DetailEditState.EditingUserSynonym) }
+                onClick = { updateDetailEditState(StudyMaterialsEditState.EditingUserSynonym) }
             ) {
                 Text(
                     text = "+ ADD SYNONYM",
@@ -190,7 +189,7 @@ fun UserSynonymsRow(
                     IconButton(
                         onClick = {
                             keyboardController?.hide()
-                            updateDetailEditState(DetailEditState.NotEditing)
+                            updateDetailEditState(StudyMaterialsEditState.NotEditing)
                         }
                     ) {
                         Column {

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.core_domain.subject.Subject
-import com.gavinferiancek.core_ui.components.subject.CharacterText
+import com.gavinferiancek.core_ui.components.text.CharacterText
 import com.gavinferiancek.core_ui.theme.spacing
 import com.gavinferiancek.review_domain.DetailScreenItem
 import kotlinx.coroutines.CoroutineScope
@@ -66,9 +66,7 @@ fun ReviewDetailHeader(
                     item {
                         TextButton(
                             modifier = Modifier
-                                .defaultMinSize(
-                                    minWidth = MaterialTheme.spacing.extraSmall,
-                                )
+                                .defaultMinSize(minWidth = MaterialTheme.spacing.extraSmall)
                                 .padding(
                                     start = if (screenItems.count() > 5) MaterialTheme.spacing.none else MaterialTheme.spacing.small,
                                 ),

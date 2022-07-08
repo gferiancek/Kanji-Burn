@@ -1,4 +1,4 @@
-package com.gavinferiancek.ui_reviewDetail.util
+package com.gavinferiancek.core_ui.util
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

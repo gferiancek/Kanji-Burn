@@ -19,6 +19,9 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.core_domain.subject.*
+import com.gavinferiancek.core_ui.components.text.CharacterText
+import com.gavinferiancek.core_ui.components.text.MeaningText
+import com.gavinferiancek.core_ui.components.text.ReadingText
 import com.gavinferiancek.core_ui.theme.*
 import kotlin.math.roundToInt
 

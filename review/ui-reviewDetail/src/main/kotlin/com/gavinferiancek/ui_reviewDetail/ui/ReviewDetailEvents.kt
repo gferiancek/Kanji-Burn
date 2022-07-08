@@ -2,9 +2,8 @@ package com.gavinferiancek.ui_reviewDetail.ui
 
 import androidx.compose.ui.text.input.TextFieldValue
 import com.gavinferiancek.core_domain.state.UIComponentState
-import com.gavinferiancek.core_domain.studymaterials.StudyMaterials
 import com.gavinferiancek.core_domain.subject.Subject
-import com.gavinferiancek.review_domain.DetailEditState
+import com.gavinferiancek.core_domain.state.StudyMaterialsEditState
 
 sealed class ReviewDetailEvents {
     data class GetReviewSubject(
@@ -25,7 +24,7 @@ sealed class ReviewDetailEvents {
     ): ReviewDetailEvents()
 
     data class UpdateDetailEditState(
-        val editState: DetailEditState,
+        val editState: StudyMaterialsEditState,
     ): ReviewDetailEvents()
 
     data class UpdateTextFieldValue(

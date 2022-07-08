@@ -1,4 +1,4 @@
-package com.gavinferiancek.ui_reviewDetail.components
+package com.gavinferiancek.core_ui.components.subject
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,8 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
+import com.gavinferiancek.core_ui.R
+import com.gavinferiancek.core_ui.components.text.AnnotatedText
 import com.gavinferiancek.core_ui.theme.spacing
-import com.gavinferiancek.ui_reviewDetail.R
 
 /**
  * Composable that draws a box to put Kanji's Meaning/Reading hints.  Helps differentiate it from

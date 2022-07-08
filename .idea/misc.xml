@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ADND-Kotlin/KanjiBurn2/core-ui/src/main/res/drawable/ic_baseline_volume_mute_12.xml" value="0.1105" />
         <entry key="..\:/ADND-Kotlin/KanjiBurn2/review/ui-reviewDetail/src/main/res/drawable/ic_baseline_help_24.xml" value="0.1" />
       </map>
     </option>

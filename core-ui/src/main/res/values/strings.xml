@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="componentsList_plus">+</string>
+    <string name="contextSentences_subtitle">Context Sentences</string>
     <string name="updateStudyMaterials_isBlank">User Synonym cannot be blank</string>
     <string name="updateStudyMaterials_error">Data was not updated. Please try again.</string>
 </resources>

@@ -14,7 +14,7 @@ import com.gavinferiancek.core_ui.SrsStageData
 import com.gavinferiancek.core_ui.theme.kanji
 import com.gavinferiancek.core_ui.theme.radical
 import com.gavinferiancek.core_ui.theme.vocab
-import com.gavinferiancek.review_domain.DetailEditState
+import com.gavinferiancek.core_domain.state.StudyMaterialsEditState
 import com.gavinferiancek.review_domain.DetailScreenItem
 import com.gavinferiancek.review_domain.model.Connections
 import com.gavinferiancek.review_domain.model.ReviewSubject
@@ -25,7 +25,7 @@ data class ReviewDetailState(
     val snackbarState: UIComponentState = UIComponentState.Hidden,
     val reviewSubject: ReviewSubject? = null,
     val connections: Connections = Connections(),
-    val editState: DetailEditState = DetailEditState.NotEditing,
+    val editState: StudyMaterialsEditState = StudyMaterialsEditState.NotEditing,
     val textFieldValue: TextFieldValue = TextFieldValue()
 )
 

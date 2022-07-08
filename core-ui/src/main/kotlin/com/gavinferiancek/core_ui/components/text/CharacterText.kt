@@ -1,8 +1,7 @@
-package com.gavinferiancek.core_ui.components.subject
+package com.gavinferiancek.core_ui.components.text
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,11 +13,10 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.gavinferiancek.core_ui.theme.spacing
 
 
 /**
- * Composable used throughout the app anytime we want to display a [Subject][com.gavinferiancek.core_domain.subject.Subject]'s
+ * Composable used throughout the app anytime we want to display a [com.gavinferiancek.core_domain.subject.Subject]'s
  * characters value.
  *
  * Some radicals in the API do not have an ASCII form, and in that case we have to fall back to displaying
@@ -32,7 +30,6 @@ fun CharacterText(
     style: TextStyle = MaterialTheme.typography.h2,
     imageLoader: ImageLoader
 ) {
-    // All radicals are a single character, so if the length == 1 we know we don't have an image url.
     if (characters.contains("https")) {
         Image(
             modifier = Modifier

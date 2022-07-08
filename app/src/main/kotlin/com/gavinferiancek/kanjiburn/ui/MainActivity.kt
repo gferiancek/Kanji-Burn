@@ -129,6 +129,7 @@ fun NavGraphBuilder.addReviewListScreen(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @ExperimentalCoilApi

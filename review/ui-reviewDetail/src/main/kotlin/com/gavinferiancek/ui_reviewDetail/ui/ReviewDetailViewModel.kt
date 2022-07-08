@@ -10,7 +10,7 @@ import com.gavinferiancek.core_domain.state.DataState
 import com.gavinferiancek.core_domain.UIComponent
 import com.gavinferiancek.core_domain.state.UIComponentState
 import com.gavinferiancek.core_domain.subject.Subject
-import com.gavinferiancek.review_domain.DetailEditState
+import com.gavinferiancek.core_domain.state.StudyMaterialsEditState
 import com.gavinferiancek.review_interactors.detail.GetConnectionsFromCache
 import com.gavinferiancek.review_interactors.detail.GetReviewSubjectFromCache
 import com.gavinferiancek.review_interactors.detail.UpdateStudyMaterials
@@ -157,7 +157,7 @@ constructor(
                         dataState.data?.let { studyMaterials ->
                             state.value = state.value.copy(
                                 reviewSubject = state.value.reviewSubject?.copy(studyMaterials = studyMaterials),
-                                editState = DetailEditState.NotEditing,
+                                editState = StudyMaterialsEditState.NotEditing,
                             )
                         }
                     }

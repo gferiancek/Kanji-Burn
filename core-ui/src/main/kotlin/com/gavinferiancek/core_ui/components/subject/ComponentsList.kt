@@ -1,4 +1,4 @@
-package com.gavinferiancek.ui_reviewDetail.components
+package com.gavinferiancek.core_ui.components.subject
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -16,15 +16,13 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import com.gavinferiancek.core_domain.subject.Subject
-import com.gavinferiancek.core_ui.components.subject.SubjectListItem
+import com.gavinferiancek.core_ui.R
 import com.gavinferiancek.core_ui.theme.spacing
-import com.gavinferiancek.ui_reviewDetail.R
 
 /**
  * Composable that takes in a list of Subjects and displays them in a Row with a "+" inbetween them.
  * (These are Components that are used to make up the subject, so they all add to make the subject.)
  *
- * @param title The text to be displayed over the Row
  * @param components The list of components to be displayed in the row
  * @param imageLoader Necessary to display images for Radicals that do not have text
  * @param navigateToDetailScreen Navigates to the detail screen of the clicked Subject.

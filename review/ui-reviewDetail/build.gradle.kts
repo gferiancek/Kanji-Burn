@@ -10,7 +10,6 @@ dependencies {
     "implementation"(project(Modules.reviewUseCases))
 
     "implementation"(Accompanist.pager)
-    "implementation"(Accompanist.flowLayout)
 
     "implementation"(Coil.coil)
 }
